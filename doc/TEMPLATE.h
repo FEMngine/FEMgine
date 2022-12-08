@@ -3,14 +3,14 @@
 
 #include "tools.h"
 
-class ClassName{
+class Lagrange{
 public:
 	// Default constructor
-	ClassName();
+	Lagrange();
 	// Other constructors
-	ClassName(std::string arg_line);
+	Lagrange(std::string arg_line);
 	// Destructor
-	~ClassName() = default;
+	~Lagrange() = default;
 
 	// Accessors
 	void method_one();

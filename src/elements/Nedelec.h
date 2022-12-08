@@ -3,14 +3,14 @@
 
 #include "tools.h"
 
-class Surface{
+class Nedelec{
 public:
 	// Default constructor
-	Surface();
+	Nedelec();
 	// Other constructors
-	Surface(std::string arg_line);
+	Nedelec(std::string arg_line);
 	// Destructor
-	~Surface() = default;
+	~Nedelec() = default;
 
 	// Accessors
 	void method_one();

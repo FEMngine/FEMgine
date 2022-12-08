@@ -3,14 +3,14 @@
 
 #include "tools.h"
 
-class Surface{
+class MeshWriter{
 public:
 	// Default constructor
-	Surface();
+	MeshWriter();
 	// Other constructors
-	Surface(std::string arg_line);
+	MeshWriter(std::string arg_line);
 	// Destructor
-	~Surface() = default;
+	~MeshWriter() = default;
 
 	// Accessors
 	void method_one();

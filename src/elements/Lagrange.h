@@ -3,14 +3,14 @@
 
 #include "tools.h"
 
-class Surface{
+class ClassName{
 public:
 	// Default constructor
-	Surface();
+	ClassName();
 	// Other constructors
-	Surface(std::string arg_line);
+	ClassName(std::string arg_line);
 	// Destructor
-	~Surface() = default;
+	~ClassName() = default;
 
 	// Accessors
 	void method_one();
