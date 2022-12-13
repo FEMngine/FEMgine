@@ -2,10 +2,8 @@
 #pragma once
 
 #include "tools.h"
-#include "../../src/geometry/Point.h"
-#include "../../src/elements/Element.h"
 
-template <class GeometryType>
+template <class EntityType>
 class EntityList{
 public:
 	// Default constructor
@@ -15,14 +13,16 @@ public:
 	// Destructor
 	~EntityList() = default;
 
+	// Special methods (make the class compatible with range-based for-loops)
+	std::vector<EntityType> get_list();
 	// Accessors
 	int get_length();
 	int get_largest_index();
-	GeometryType get_entity(int arg_index);
-	GeometryType get_head();
-	GeometryType get_tail();
+	EntityType get_entity(int arg_index, bool local=false);
+	EntityType get_head();
+	EntityType get_tail();
 	// Other methods
-	void add_entity(GeometryType arg_entity);
+	void add_entity(EntityType arg_entity);
 
 protected:
 	// Attributes to be inherited
@@ -31,6 +31,6 @@ protected:
 private:
 	// Attributes
 	int length = 0;
-	std::vector<GeometryType> entity_list;
+	std::vector<EntityType> entity_list;
 	// Private methods
 };

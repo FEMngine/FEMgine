@@ -2,8 +2,9 @@
 #pragma once
 
 #include "tools.h"
+#include "../../utilities/items/Entity.h"
 
-class Point{
+class Point: public Entity{
 public:
 	// Default constructor
 	Point();
@@ -16,8 +17,6 @@ public:
 	~Point() = default;
 
 	// Accessors
-	int get_dimension();
-	int get_index();
 	double get_x();
 	double get_y();
 	double get_z();
@@ -32,12 +31,8 @@ protected:
 
 private:
 	// Attributes
-	int dimension;
-	int global_index;
 	double coord_x, coord_y, coord_z;
-
 	bool dof = true;
-
 	double boundary_condition;
 	// Private methods
 };

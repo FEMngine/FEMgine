@@ -20,6 +20,7 @@ public:
 	// Other methods
 	virtual void read_list();
 
+
 protected:
 	// Attributes to be inherited
 	std::string filename;
@@ -29,6 +30,7 @@ protected:
 	std::string opening_line, closing_line;
 	std::streampos beginning_position, end_position;
 	// Overloaded methods
+	virtual void process();
 	virtual void set_endlines();
 	virtual void set_position();
 	virtual void format_entity(int arg_entity_list_index);

@@ -4,59 +4,38 @@
 // CONSTRUCTORS & DESTRUCTORS
 
 
-Point::Point(){
+Point::Point(): Entity(){
 	// Default constructor
 }
 
-Point::Point(int arg_global_index){
+Point::Point(int arg_global_index): Entity(arg_global_index){
 	// Parametric constructor
-	global_index = arg_global_index;
-
 	bool dof = false;
 }
 
-Point::Point(int arg_global_index, double arg_x){
+Point::Point(int arg_global_index, double arg_x): Entity(arg_global_index){
 	// Parametric constructor
-	global_index = arg_global_index;
-	
-	coord_x = arg_x;
-	
 	dimension = 1;
+	coord_x = arg_x;
 }
 
-Point::Point(int arg_global_index, double arg_x, double arg_y){
+Point::Point(int arg_global_index, double arg_x, double arg_y): Entity(arg_global_index){
 	// Parametric constructor
-	global_index = arg_global_index;
-	
+	dimension = 2;
 	coord_x = arg_x;
 	coord_y = arg_y;
-
-	dimension = 2;
 }
 
-Point::Point(int arg_global_index, double arg_x, double arg_y, double arg_z){
+Point::Point(int arg_global_index, double arg_x, double arg_y, double arg_z): Entity(arg_global_index){
 	// Parametric constructor
-	global_index = arg_global_index;
-	
+	dimension = 3;
 	coord_x = arg_x;
 	coord_y = arg_y;
 	coord_z = arg_z;
-
-	dimension = 3;
 }
 
 
 // ACCESSORS
-
-
-int Point::get_index(){
-	return global_index;
-}
-
-
-int Point::get_dimension(){
-	return dimension;
-}
 
 
 double Point::get_x(){

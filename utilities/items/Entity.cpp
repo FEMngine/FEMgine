@@ -8,38 +8,26 @@ Entity::Entity(){
 	// Default constructor
 }
 
-Entity::Entity(std::string arg_line){
+Entity::Entity(int arg_global_index){
 	// Parametric constructor
+	global_index = arg_global_index;
 }
 
 
 // ACCESSORS
 
 
-void Entity::method_one(){
-	//
+int Entity::get_index(){
+	return global_index;
+}
+
+int Entity::get_dimension(){
+	return dimension;
 }
 
 
 // OTHER METHODS
 
-
-void Entity::method_two(){
-	//
-}
-
-
 // OVERLOADED METHODS
 
-
-virtual void Entity::method_three(){
-	//
-}
-
-
 // PRIVATE METHODS
-
-
-void Entity::method_four(){
-	//
-}

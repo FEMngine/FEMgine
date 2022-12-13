@@ -16,6 +16,7 @@ public:
 	// Accessors
 	// Other methods
 	void read_list();
+	void process();
 
 private:
 	// Attributes

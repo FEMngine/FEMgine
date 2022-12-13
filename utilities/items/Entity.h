@@ -8,22 +8,22 @@ public:
 	// Default constructor
 	Entity();
 	// Other constructors
-	Entity(std::string arg_line);
+	Entity(int arg_global_index);
 	// Destructor
 	~Entity() = default;
 
 	// Accessors
-	void method_one();
+	int get_index();
+	int get_dimension();
 	// Other methods
-	void method_two();
 
 protected:
 	// Attributes to be inherited
+	int global_index;
+	int dimension;
 	// Overloaded methods
-	virtual void method_three();
 
 private:
 	// Attributes
 	// Private methods
-	void method_four();
 };

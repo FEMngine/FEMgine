@@ -4,42 +4,26 @@
 // CONSTRUCTORS & DESTRUCTORS
 
 
-Line::Line(){
+Line::Line(): Entity(){
 	// Default constructor
 }
 
-Line::Line(std::string arg_line){
+Line::Line(Point arg_initial, Point arg_final): Entity(){
 	// Parametric constructor
+	initialPoint = arg_initial;
+	finalPoint = arg_final;
 }
 
 
 // ACCESSORS
 
-
-void Line::method_one(){
-	//
-}
-
-
 // OTHER METHODS
 
 
-void Line::method_two(){
-	//
+void Line::set_global_index(int arg_global_index){
+	global_index = arg_global_index;
 }
-
 
 // OVERLOADED METHODS
 
-
-virtual void Line::method_three(){
-	//
-}
-
-
 // PRIVATE METHODS
-
-
-void Line::method_four(){
-	//
-}

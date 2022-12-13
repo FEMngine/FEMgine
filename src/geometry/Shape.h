@@ -3,21 +3,23 @@
 
 #include "tools.h"
 #include "../geometry/Point.h"
-#include "../../utilities/items/Entity.h"
 #include "../../utilities/items/EntityList.h"
 
-class Line: public Entity{
+class Shape{
 public:
 	// Default constructor
-	Line();
+	Shape();
 	// Other constructors
-	Line(Point arg_initial, Point arg_final);
+	Shape(std::string arg_line);
 	// Destructor
-	~Line() = default;
+	~Shape() = default;
 
 	// Accessors
+	std::string get_shape();
 	// Other methods
-	void set_global_index(int arg_global_index);
+	void init_shape(std::string arg_shape);
+	matrix<int> sort_edges(EntityList<Point>* arg_nodes);
+	matrix<int> sort_faces();
 
 protected:
 	// Attributes to be inherited
@@ -25,10 +27,7 @@ protected:
 
 private:
 	// Attributes
-	int length;
-	int global_index;
-	Point initialPoint;
-	Point finalPoint;
-	EntityList<Point> innerNodes; // use add_entity();
+	std::string shape;
+	std::vector<std::string> shape_list = {"Triangles", "Tetrahedra", "Quadrilaterals", "Hexahedra"};
 	// Private methods
 };

@@ -42,6 +42,15 @@ void GidReader::read_list(){
 		}
 	}
 	mesh_file.close();
+
+	// Initialise the mesh charateristics with the updated info read from the txt file
+	init();
+}
+
+
+void GidReader::process(){
+	// Modificare elements (riarrangiando l'ordine dei nodi in base alla notazione TAP'97)
+	return;
 }
 
 
