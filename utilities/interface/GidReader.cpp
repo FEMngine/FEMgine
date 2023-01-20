@@ -42,15 +42,15 @@ void GidReader::read_list(){
 		}
 	}
 	mesh_file.close();
-
-	// Initialise the mesh charateristics with the updated info read from the txt file
-	init();
 }
 
 
 void GidReader::process(){
+	// Get the edges and the faces of the mesh from Gid
+	build_missing_entity_list();
+	// Initialise the mesh charateristics with the updated info read from the txt file
+	init();
 	// Modificare elements (riarrangiando l'ordine dei nodi in base alla notazione TAP'97)
-	return;
 }
 
 
@@ -122,7 +122,7 @@ void GidReader::format_entity(int arg_entity_list_index){
 			}
 
 			// Update the entity list of the class
-			elements.add_entity(Element(index, nodes_indices));
+			temp_elements.add_entity(Element(index, nodes_indices));
 			break;
 		}
 
@@ -146,4 +146,33 @@ void GidReader::format_entity(int arg_entity_list_index){
 			break;
 		}
 	}
+}
+
+void GidReader::build_missing_entity_list(){
+	// Initialise the global index that will iteratively be assigned to the edges
+	int line_global_index = 1;
+	// Gid does not provide any info regarding the edges in the mesh therefore...
+	for(auto element : temp_elements.get_list()){
+		EntityList<Line> elementEdges;
+		// ... we must iterate over each element in the elements' list and ...
+		for(auto edge : element.get_edges().get_list()){
+			// ... for each of the edges that define such element check if it already exists in the mesh's edges list
+			if(!edges.it_exists(&edge)){
+				// ... and if it does not then initialise the edge's global index and update the mesh's edges list!
+				edge.set_global_index(line_global_index);
+				edges.add_entity(edge);
+				// Now we need to update the edges list of the element
+				elementEdges.add_entity(edge);
+				// Finally don't forget to update the global index counter
+				line_global_index++;
+			}
+			else{
+				elementEdges.add_entity(edge);
+			}
+		}
+		// We then fill-in the real elements list of the mesh...
+		elements.add_entity(Element(element, elementEdges));
+	}
+	// ... and permanently erase the temporary one!
+	temp_elements.clear();
 }

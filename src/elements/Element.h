@@ -14,6 +14,8 @@ public:
 	Element();
 	// Other constructors
 	Element(int arg_global_index, std::vector<Point> arg_nodes);
+	// Copy constructor
+	Element(Element &copy_element, EntityList<Line> arg_edges);
 	// Destructor
 	~Element() = default;
 

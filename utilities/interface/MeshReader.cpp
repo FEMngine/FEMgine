@@ -54,6 +54,8 @@ void MeshReader::set_position(){/*  */}
 
 void MeshReader::format_entity(int arg_entity_list_index){/*  */}
 
+void MeshReader::build_missing_entity_list(){/*  */}
+
 
 // PRIVATE METHODS
 

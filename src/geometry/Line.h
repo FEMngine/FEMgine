@@ -16,6 +16,8 @@ public:
 	~Line() = default;
 
 	// Accessors
+	Point get_initial();
+	Point get_final();
 	// Other methods
 	void set_global_index(int arg_global_index);
 
@@ -26,9 +28,8 @@ protected:
 private:
 	// Attributes
 	int length;
-	int global_index;
 	Point initialPoint;
 	Point finalPoint;
-	EntityList<Point> innerNodes; // use add_entity();
+	EntityList<Point> midPoints; // use add_entity();
 	// Private methods
 };

@@ -13,7 +13,7 @@ public:
 	// Destructor
 	~EntityList() = default;
 
-	// Special methods (make the class compatible with range-based for-loops)
+	// Special method (makes the class compatible with range-based for-loops)
 	std::vector<EntityType> get_list();
 	// Accessors
 	int get_length();
@@ -22,7 +22,12 @@ public:
 	EntityType get_head();
 	EntityType get_tail();
 	// Other methods
+	void clear();
+	void pop(int arg_index);
 	void add_entity(EntityType arg_entity);
+	bool it_exists(EntityType* arg_entity);
+	void insert(int arg_index, EntityType arg_entity);
+	void swap(std::vector<EntityType> arg_entity_list);
 
 protected:
 	// Attributes to be inherited

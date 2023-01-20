@@ -31,6 +31,19 @@ Element::Element(int arg_global_index, std::vector<Point> arg_nodes): Entity(arg
 	curvilinear_order = 1;
 }
 
+Element::Element(Element &copy_element, EntityList<Line> arg_edges): Entity(copy_element.get_index()){
+	// Copy constructor
+	nodes = copy_element.get_nodes();
+	edges = arg_edges;
+
+	type.init_shape("Triangles");
+	dimension = nodes.get_head().get_dimension();
+	
+	family = "Lagrange";
+	polynomial_order = 1;
+	curvilinear_order = 1;
+}
+
 
 // ACCESSORS
 

@@ -21,10 +21,10 @@ public:
 
 protected:
 	// Attributes to be inherited
-	EntityList<Point> inner_nodes;
+	EntityList<Point>   inner_nodes;
 	EntityList<Element> elements;
-	EntityList<Point> boundary_nodes;
-	EntityList<Line> edges;
+	EntityList<Point>   boundary_nodes;
+	EntityList<Line>    edges;
 	EntityList<Surface> faces;
 	// Overloaded methods
 	virtual void process();

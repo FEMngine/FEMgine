@@ -20,8 +20,10 @@ public:
 
 private:
 	// Attributes
+	EntityList<Element> temp_elements;
 	// Private methods
 	void set_endlines();
 	void set_position();
 	void format_entity(int arg_entity_list_index);
+	void build_missing_entity_list();
 };

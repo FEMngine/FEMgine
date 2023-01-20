@@ -9,8 +9,6 @@ class Shape{
 public:
 	// Default constructor
 	Shape();
-	// Other constructors
-	Shape(std::string arg_line);
 	// Destructor
 	~Shape() = default;
 
