@@ -28,6 +28,7 @@ public:
 	bool it_exists(EntityType* arg_entity);
 	void insert(int arg_index, EntityType arg_entity);
 	void swap(std::vector<EntityType> arg_entity_list);
+	void fill_in(EntityList<EntityType>* arg_newlist);
 
 protected:
 	// Attributes to be inherited

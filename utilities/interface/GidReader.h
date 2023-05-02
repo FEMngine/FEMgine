@@ -26,4 +26,5 @@ private:
 	void set_position();
 	void format_entity(int arg_entity_list_index);
 	void build_missing_entity_list();
+	void rearrange();
 };

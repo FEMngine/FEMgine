@@ -1,7 +1,7 @@
 #include "../../utilities/interface/GidReader.h"
 
 int main(int argc, char* argv[]){
-	GidReader gid("mesh.txt");
+	GidReader gid("triangle_linear.txt");
 	
 	gid.read_list();
 	gid.process();
