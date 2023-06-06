@@ -47,4 +47,5 @@ private:
 	// Private methods
 	void init_edges();
 	void init_faces();
+	void infere_type();
 };

@@ -45,12 +45,17 @@ void GidReader::read_list(){
 }
 
 
-void GidReader::process(){
+void GidReader::process(std::string arg_family, int arg_order){
 	// Get the edges and the faces of the mesh from Gid
 	build_missing_entity_list();
 	// Initialise the mesh charateristics with the updated info read from the txt file
-	init();
-	// Modificare elements (riarrangiando l'ordine dei nodi in base alla notazione TAP'97)
+	init(&arg_family, &arg_order);
+	// Modify the order (local index) of the edges of the elements to comply with TAP'97
+	rearrange();
+	// Create the type of Finite Elements based on the specified Degrees Of Freedom (DOFs)
+	build_dofs();
+	// Write mesh into separate files
+	write_mesh();
 }
 
 
@@ -106,7 +111,7 @@ void GidReader::format_entity(int arg_entity_list_index){
 			}
 
 			// Update the entity list of the class
-			inner_nodes.add_entity(Point(global_index, coordinates[0], coordinates[1], coordinates[2]));
+			inner_nodes.add_entity(Point(global_index, coordinates[0], coordinates[1]));
 			break;
 		}
 
@@ -173,6 +178,48 @@ void GidReader::build_missing_entity_list(){
 		// We then fill-in the real elements list of the mesh...
 		elements.add_entity(Element(element, elementEdges));
 	}
-	// ... and permanently erase the temporary one!
+	// ... and temporarly erase the temporary one!
+	temp_elements.clear();
+}
+
+void GidReader::rearrange(){
+	// Loop over each element
+	for(auto element : elements.get_list()){
+		// Get the current edges list and initialise an empty rearranged edges list
+		EntityList<Line> current = element.get_edges(); 
+		EntityList<Line> rearranged;
+		// Rearrange the edges' local index based to the element type
+		if(element.get_type()=="Triangle"){
+			// Hard coded
+			rearranged.add_entity(current.get_entity(1, true));
+			rearranged.add_entity(current.get_entity(2, true));
+			rearranged.add_entity(current.get_entity(0, true));
+		}
+		else if(element.get_type()=="Quadrilateral"){
+			// Hard coded
+			rearranged.add_entity(current.get_entity(2, true));
+			rearranged.add_entity(current.get_entity(3, true));
+			rearranged.add_entity(current.get_entity(0, true));
+			rearranged.add_entity(current.get_entity(1, true));
+		}
+		// Add the new element (with rearranged edges) to the temporary list
+		temp_elements.add_entity(Element(element, rearranged));
+	}
+	// Erase the Mesh's elements list and update it with the temporary one
+	elements.fill_in(&temp_elements);
+	// vacate the temporary elements list to be used for the last time in build_dofs()
+	temp_elements.clear();
+}
+
+void GidReader::build_dofs(){
+	// Loop over each element
+	for(auto element : elements.get_list()){
+		// Element new_element();
+		// Add the new element to the temporary list
+		temp_elements.add_entity(element);
+	}
+	// Erase the Mesh's elements list and update it with the temporary one
+	elements.fill_in(&temp_elements);
+	// Now permanently erase the temporary elements list
 	temp_elements.clear();
 }

@@ -18,6 +18,7 @@ public:
 	// Accessors
 	// Other methods
 	void print_mesh();
+	void write_mesh();
 
 protected:
 	// Attributes to be inherited
@@ -28,7 +29,9 @@ protected:
 	EntityList<Surface> faces;
 	// Overloaded methods
 	virtual void process();
-	void init();
+	virtual void build_dofs();
+	// Methods to be inherited
+	void init(std::string* arg_family, int* arg_order);
 
 private:
 	// Attributes

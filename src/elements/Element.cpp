@@ -19,12 +19,14 @@ Element::Element(int arg_global_index, std::vector<Point> arg_nodes): Entity(arg
 		nodes.add_entity(node);
 	}
 
+	dimension = nodes.get_head().get_dimension();
+
+	// Determine the shape of the element
+	infere_type();
+
 	// Determine the local edges and faces of the element
-	type.init_shape("Triangles");
 	init_edges();
 	init_faces();
-
-	dimension = nodes.get_head().get_dimension();
 	
 	family = "Lagrange";
 	polynomial_order = 1;
@@ -36,10 +38,13 @@ Element::Element(Element &copy_element, EntityList<Line> arg_edges): Entity(copy
 	nodes = copy_element.get_nodes();
 	edges = arg_edges;
 
-	type.init_shape("Triangles");
+	//std::cout << arg_edges.get_length() << "\n";
+
 	dimension = nodes.get_head().get_dimension();
 	
-	family = "Lagrange";
+	type.init_shape(copy_element.get_type());
+	family = copy_element.get_family();
+
 	polynomial_order = 1;
 	curvilinear_order = 1;
 }
@@ -96,6 +101,7 @@ void Element::init_edges(){
 			Line edge(nodes.get_entity(iterable_nodes[row][0]), nodes.get_entity(iterable_nodes[row][1]));
 			edges.add_entity(edge);
 		}
+		//std::cout << edges.get_length() << "\n";
 		return;
 	}
 }
@@ -107,5 +113,19 @@ void Element::init_faces(){
 	else
 	{
 		return;
+	}
+}
+
+void Element::infere_type(){
+	if(dimension==2){
+		if(nodes.get_length()==3){
+			type.init_shape("Triangle");
+		}
+		else if(nodes.get_length()==4){
+			type.init_shape("Quadrilateral");
+		}
+	}
+	else if(dimension==3){
+		//
 	}
 }

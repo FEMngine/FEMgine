@@ -55,6 +55,27 @@ matrix<int> Shape::sort_edges(EntityList<Point>* arg_nodes){
 		break;
 
 		case(2): // Quadrilaterals
+		node_couple.push_back(arg_nodes -> get_entity(0, true).get_index());
+		node_couple.push_back(arg_nodes -> get_entity(1, true).get_index());
+		iterable_nodes.push_back(node_couple);
+
+		node_couple.erase(node_couple.begin(), node_couple.end());
+
+		node_couple.push_back(arg_nodes -> get_entity(1, true).get_index());
+		node_couple.push_back(arg_nodes -> get_entity(2, true).get_index());
+		iterable_nodes.push_back(node_couple);
+
+		node_couple.erase(node_couple.begin(), node_couple.end());
+
+		node_couple.push_back(arg_nodes -> get_entity(2, true).get_index());
+		node_couple.push_back(arg_nodes -> get_entity(3, true).get_index());
+		iterable_nodes.push_back(node_couple);
+
+		node_couple.erase(node_couple.begin(), node_couple.end());
+
+		node_couple.push_back(arg_nodes -> get_entity(3, true).get_index());
+		node_couple.push_back(arg_nodes -> get_entity(0, true).get_index());
+		iterable_nodes.push_back(node_couple);
 		break;
 
 		case(3): // Hexahedra

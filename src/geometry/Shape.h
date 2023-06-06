@@ -26,6 +26,6 @@ protected:
 private:
 	// Attributes
 	std::string shape;
-	std::vector<std::string> shape_list = {"Triangles", "Tetrahedra", "Quadrilaterals", "Hexahedra"};
+	std::vector<std::string> shape_list = {"Triangle", "Tetrahedron", "Quadrilateral", "Hexahedron"};
 	// Private methods
 };

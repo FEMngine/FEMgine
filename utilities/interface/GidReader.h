@@ -16,7 +16,8 @@ public:
 	// Accessors
 	// Other methods
 	void read_list();
-	void process();
+	void process(std::string arg_family, int arg_order);
+	void build_dofs();
 
 private:
 	// Attributes
@@ -26,4 +27,5 @@ private:
 	void set_position();
 	void format_entity(int arg_entity_list_index);
 	void build_missing_entity_list();
+	void rearrange();
 };

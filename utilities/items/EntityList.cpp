@@ -126,6 +126,13 @@ void EntityList<EntityType>::swap(std::vector<EntityType> arg_entity_list){
 	entity_list = arg_entity_list;
 }
 
+template<class EntityType>
+void EntityList<EntityType>::fill_in(EntityList<EntityType>* arg_newlist){
+	clear();
+	entity_list = arg_newlist -> get_list();
+	length = arg_newlist -> get_length();
+}
+
 
 // OVERLOADED METHODS
 
