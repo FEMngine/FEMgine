@@ -112,25 +112,35 @@ void Mesh::print_mesh(){
 	std::cout << "\n\n ****  END MESH INFORMATION  ****" << "\n\n\n";
 }
 
+void Mesh::write_mesh(){
+	//
+}
+
 
 // OVERLOADED METHODS
 
 
 void Mesh::process(){/*  */};
 
-void Mesh::init(){
-	// Initialises the fundamental information about the mesh
+void Mesh::build_dofs(){/*  */};
+
+
+// METHODS TO BE INHERITED
+
+
+void Mesh::init(std::string* arg_family, int* arg_order){
+	// Initialises the fundamental information about the mesh as provided by the input raw mesh
 	dimension = inner_nodes.get_entity(1).get_dimension(); 
+	element_type = elements.get_entity(1).get_type();
 	
 	nnodes = inner_nodes.get_length();
 	nedges = edges.get_length();
 	nfaces = faces.get_length();
 	nelements = elements.get_length();
 	
-	element_type = elements.get_entity(1).get_type();
-	element_family = elements.get_entity(1).get_family();
-	
-	polynomial_order = elements.get_entity(1).get_poly_order();
+	// Initialises the custom information about the mesh as provided by the user
+	element_family = *arg_family;
+	polynomial_order = *arg_order;
 }
 
 // PRIVATE METHODS

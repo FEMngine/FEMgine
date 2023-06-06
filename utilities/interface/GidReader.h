@@ -16,7 +16,8 @@ public:
 	// Accessors
 	// Other methods
 	void read_list();
-	void process();
+	void process(std::string arg_family, int arg_order);
+	void build_dofs();
 
 private:
 	// Attributes

@@ -45,13 +45,17 @@ void GidReader::read_list(){
 }
 
 
-void GidReader::process(){
+void GidReader::process(std::string arg_family, int arg_order){
 	// Get the edges and the faces of the mesh from Gid
 	build_missing_entity_list();
 	// Initialise the mesh charateristics with the updated info read from the txt file
-	init();
+	init(&arg_family, &arg_order);
 	// Modify the order (local index) of the edges of the elements to comply with TAP'97
 	rearrange();
+	// Create the type of Finite Elements based on the specified Degrees Of Freedom (DOFs)
+	build_dofs();
+	// Write mesh into separate files
+	write_mesh();
 }
 
 
@@ -200,6 +204,19 @@ void GidReader::rearrange(){
 		}
 		// Add the new element (with rearranged edges) to the temporary list
 		temp_elements.add_entity(Element(element, rearranged));
+	}
+	// Erase the Mesh's elements list and update it with the temporary one
+	elements.fill_in(&temp_elements);
+	// vacate the temporary elements list to be used for the last time in build_dofs()
+	temp_elements.clear();
+}
+
+void GidReader::build_dofs(){
+	// Loop over each element
+	for(auto element : elements.get_list()){
+		// Element new_element();
+		// Add the new element to the temporary list
+		temp_elements.add_entity(element);
 	}
 	// Erase the Mesh's elements list and update it with the temporary one
 	elements.fill_in(&temp_elements);
