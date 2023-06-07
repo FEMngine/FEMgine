@@ -4,42 +4,24 @@
 // CONSTRUCTORS & DESTRUCTORS
 
 
-Lagrange::Lagrange(){
+Lagrange::Lagrange(): Element(){
 	// Default constructor
 }
 
-Lagrange::Lagrange(std::string arg_line){
-	// Parametric constructor
+Lagrange::Lagrange(Element &copy_element, std::string* arg_family, int* arg_order): Element(copy_element){
+	// Copy constructor
+	family = *arg_family;
+	polynomial_order = *arg_order;
 }
 
 
 // ACCESSORS
 
 
-void Lagrange::method_one(){
-	//
-}
-
-
 // OTHER METHODS
-
-
-void Lagrange::method_two(){
-	//
-}
 
 
 // OVERLOADED METHODS
 
 
-virtual void Lagrange::method_three(){
-	//
-}
-
-
 // PRIVATE METHODS
-
-
-void Lagrange::method_four(){
-	//
-}

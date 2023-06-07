@@ -17,7 +17,7 @@ public:
 	// Other methods
 	void read_list();
 	void process(std::string arg_family, int arg_order);
-	void build_dofs();
+	void build_dofs(std::string* arg_family, int* arg_order);
 
 private:
 	// Attributes

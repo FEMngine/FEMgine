@@ -4,42 +4,24 @@
 // CONSTRUCTORS & DESTRUCTORS
 
 
-Nedelec::Nedelec(){
+Nedelec::Nedelec(): Element(){
 	// Default constructor
 }
 
-Nedelec::Nedelec(std::string arg_line){
-	// Parametric constructor
+Nedelec::Nedelec(Element &copy_element, std::string* arg_family, int* arg_order): Element(copy_element){
+	// Copy constructor
+	family = *arg_family;
+	polynomial_order = *arg_order;
 }
 
 
 // ACCESSORS
 
 
-void Nedelec::method_one(){
-	//
-}
-
-
 // OTHER METHODS
-
-
-void Nedelec::method_two(){
-	//
-}
 
 
 // OVERLOADED METHODS
 
 
-virtual void Nedelec::method_three(){
-	//
-}
-
-
 // PRIVATE METHODS
-
-
-void Nedelec::method_four(){
-	//
-}

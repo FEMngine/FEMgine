@@ -1,29 +1,27 @@
 // PRIVATE HEADER
 #pragma once
 
-#include "tools.h"
+// Base class header
+#include "Element.h"
 
-class Nedelec{
+class Nedelec: public Element{
 public:
 	// Default constructor
 	Nedelec();
 	// Other constructors
-	Nedelec(std::string arg_line);
+	// Copy constructor
+	Nedelec(Element &copy_element, std::string* arg_family, int* arg_order);
 	// Destructor
 	~Nedelec() = default;
 
 	// Accessors
-	void method_one();
 	// Other methods
-	void method_two();
 
 protected:
 	// Attributes to be inherited
 	// Overloaded methods
-	virtual void method_three();
 
 private:
 	// Attributes
 	// Private methods
-	void method_four();
 };

@@ -32,13 +32,13 @@ public:
 
 protected:
 	// Attributes to be inherited
+	std::string family;
+	int polynomial_order;
 	// Overloaded methods
 
 private:
 	// Attributes
 	Shape type;
-	std::string family;
-	int polynomial_order;
 	int curvilinear_order;
 
 	EntityList<Point>   nodes;

@@ -1,29 +1,30 @@
 // PRIVATE HEADER
 #pragma once
 
-#include "tools.h"
+#include "../../utilities/items/DOF.h"
 
-class ClassName{
+// Base class header
+#include "Element.h"
+
+class Lagrange: public Element{
 public:
 	// Default constructor
-	ClassName();
+	Lagrange();
 	// Other constructors
-	ClassName(std::string arg_line);
+	// Copy constructor
+	Lagrange(Element &copy_element, std::string* arg_family, int* arg_order);
 	// Destructor
-	~ClassName() = default;
+	~Lagrange() = default;
 
 	// Accessors
-	void method_one();
 	// Other methods
-	void method_two();
 
 protected:
 	// Attributes to be inherited
 	// Overloaded methods
-	virtual void method_three();
 
 private:
 	// Attributes
+	EntityList<DOF> dofs;
 	// Private methods
-	void method_four();
 };

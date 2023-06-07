@@ -144,11 +144,20 @@ void EntityList<EntityType>::fill_in(EntityList<EntityType>* arg_newlist){
 #include "../../src/geometry/Point.h"
 template class EntityList<Point>;
 
+#include "DOF.h"
+template class EntityList<DOF>;
+
 #include "../../src/geometry/Surface.h"
 template class EntityList<Surface>;
 
 #include "../../src/elements/Element.h"
 template class EntityList<Element>;
+
+#include "../../src/elements/Lagrange.h"
+template class EntityList<Lagrange>;
+
+#include "../../src/elements/Nedelec.h"
+template class EntityList<Nedelec>;
 
 
 // EXPLICIT (FULL) TEMPLATE SPECIALISATION 

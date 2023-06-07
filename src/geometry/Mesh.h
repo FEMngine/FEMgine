@@ -3,10 +3,12 @@
 
 #include "tools.h"
 #include "../../utilities/items/EntityList.h"
+#include "../../utilities/items/DOF.h"
 #include "../../src/geometry/Point.h"
 #include "../../src/geometry/Line.h"
 #include "../../src/geometry/Surface.h"
-#include "../../src/elements/Element.h"
+#include "../../src/elements/Lagrange.h"
+#include "../../src/elements/Nedelec.h"
 
 class Mesh{
 public:
@@ -23,10 +25,15 @@ public:
 protected:
 	// Attributes to be inherited
 	EntityList<Point>   inner_nodes;
-	EntityList<Element> elements;
 	EntityList<Point>   boundary_nodes;
+	EntityList<DOF>     dofs;
+
 	EntityList<Line>    edges;
 	EntityList<Surface> faces;
+
+	EntityList<Element> elements;
+	EntityList<Lagrange> Lelements;
+	EntityList<Nedelec>  Nelements;
 	// Overloaded methods
 	virtual void process();
 	virtual void build_dofs();
@@ -37,6 +44,7 @@ private:
 	// Attributes
 	int dimension;
 	int nnodes;
+	int ndofs;
 	int nelements;
 	int nedges;
 	int nfaces;

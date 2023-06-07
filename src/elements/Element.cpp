@@ -8,8 +8,6 @@ Element::Element(): Entity(){
 	// Default constructor
 	dimension = 2;
 	type.init_shape("Triangles");
-	family = "Lagrange";
-	polynomial_order = 1;
 	curvilinear_order = 1;
 }
 
@@ -20,6 +18,7 @@ Element::Element(int arg_global_index, std::vector<Point> arg_nodes): Entity(arg
 	}
 
 	dimension = nodes.get_head().get_dimension();
+	curvilinear_order = 1;
 
 	// Determine the shape of the element
 	infere_type();
@@ -27,10 +26,6 @@ Element::Element(int arg_global_index, std::vector<Point> arg_nodes): Entity(arg
 	// Determine the local edges and faces of the element
 	init_edges();
 	init_faces();
-	
-	family = "Lagrange";
-	polynomial_order = 1;
-	curvilinear_order = 1;
 }
 
 Element::Element(Element &copy_element, EntityList<Line> arg_edges): Entity(copy_element.get_index()){
@@ -38,14 +33,11 @@ Element::Element(Element &copy_element, EntityList<Line> arg_edges): Entity(copy
 	nodes = copy_element.get_nodes();
 	edges = arg_edges;
 
-	//std::cout << arg_edges.get_length() << "\n";
-
 	dimension = nodes.get_head().get_dimension();
 	
 	type.init_shape(copy_element.get_type());
 	family = copy_element.get_family();
 
-	polynomial_order = 1;
 	curvilinear_order = 1;
 }
 
