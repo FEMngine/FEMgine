@@ -6,7 +6,7 @@ SRCDIR = ../../src
 UTLDIR = ../../utilities
 OBJDIR = obj
 
-OBJ = $(OBJDIR)/Entity.o $(OBJDIR)/EntityList.o $(OBJDIR)/Mesh.o $(OBJDIR)/MeshReader.o $(OBJDIR)/GidReader.o $(OBJDIR)/Point.o $(OBJDIR)/Shape.o $(OBJDIR)/Element.o $(OBJDIR)/Line.o $(OBJDIR)/test.o
+OBJ = $(OBJDIR)/Entity.o $(OBJDIR)/EntityList.o $(OBJDIR)/Mesh.o $(OBJDIR)/MeshReader.o $(OBJDIR)/GidReader.o $(OBJDIR)/Point.o $(OBJDIR)/DOF.o $(OBJDIR)/Line.o $(OBJDIR)/Shape.o $(OBJDIR)/Element.o $(OBJDIR)/Lagrange.o $(OBJDIR)/Nedelec.o $(OBJDIR)/test.o
 
 CXXOPTIONS = -g -std=c++17
 CXXFLAGS = $(CXXOPTIONS) -I $(INCDIR)
@@ -33,13 +33,22 @@ $(OBJDIR)/GidReader.o: $(UTLDIR)/interface/GidReader.cpp $(INCDIR)/*.h
 $(OBJDIR)/Point.o: $(SRCDIR)/geometry/Point.cpp $(INCDIR)/*.h
 	$(CXX) -c $< -o $@ $(CXXFLAGS)
 
-$(OBJDIR)/Shape.o: $(SRCDIR)/geometry/Shape.cpp $(INCDIR)/*.h
+$(OBJDIR)/DOF.o: $(UTLDIR)/items/DOF.cpp $(INCDIR)/*.h
 	$(CXX) -c $< -o $@ $(CXXFLAGS)
 
 $(OBJDIR)/Line.o: $(SRCDIR)/geometry/Line.cpp $(INCDIR)/*.h
 	$(CXX) -c $< -o $@ $(CXXFLAGS)
 
+$(OBJDIR)/Shape.o: $(SRCDIR)/geometry/Shape.cpp $(INCDIR)/*.h
+	$(CXX) -c $< -o $@ $(CXXFLAGS)
+
 $(OBJDIR)/Element.o: $(SRCDIR)/elements/Element.cpp $(INCDIR)/*.h
+	$(CXX) -c $< -o $@ $(CXXFLAGS)
+
+$(OBJDIR)/Lagrange.o: $(SRCDIR)/elements/Lagrange.cpp $(INCDIR)/*.h
+	$(CXX) -c $< -o $@ $(CXXFLAGS)
+
+$(OBJDIR)/Nedelec.o: $(SRCDIR)/elements/Nedelec.cpp $(INCDIR)/*.h
 	$(CXX) -c $< -o $@ $(CXXFLAGS)
 
 $(OBJDIR)/test.o: $(ROOTDR)/tutorials/test/test.cpp $(INCDIR)/*.h
