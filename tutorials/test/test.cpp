@@ -6,11 +6,13 @@ int main(int argc, char* argv[]){
 	// Define the polynomial order of the approximation subspace
 	int order = 1;
 
-	// Read the raw mesh and pre-process it
+	// Read the raw mesh and process it
 	GidReader gid("triangle_linear.txt");
 	gid.read_list();
 	gid.process(family, order);
 	gid.print_mesh();
+
+	// Assemble the linear system
 
 	return 0;
 }

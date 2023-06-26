@@ -31,9 +31,9 @@ protected:
 	EntityList<Line>    edges;
 	EntityList<Surface> faces;
 
-	EntityList<Element> elements;
-	EntityList<Lagrange> Lelements;
-	EntityList<Nedelec>  Nelements;
+	EntityList<Element>  elements;
+	EntityList<Lagrange> lagrangian;
+	EntityList<Nedelec>  curl_conf;
 	// Overloaded methods
 	virtual void process();
 	virtual void build_dofs();

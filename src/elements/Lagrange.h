@@ -17,6 +17,7 @@ public:
 	~Lagrange() = default;
 
 	// Accessors
+	EntityList<DOF> get_dofs();
 	// Other methods
 
 protected:
@@ -27,4 +28,5 @@ private:
 	// Attributes
 	EntityList<DOF> dofs;
 	// Private methods
+	void init_dofs();
 };

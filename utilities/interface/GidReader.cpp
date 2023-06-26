@@ -217,14 +217,14 @@ void GidReader::build_dofs(std::string* arg_family, int* arg_order){
 		// Lagrange elements
 		for(auto element : elements.get_list()){
 			Lagrange new_element(element, arg_family, arg_order);
-			Lelements.add_entity(new_element);
+			lagrangian.add_entity(new_element);
 		}
 	}
 	else if(*arg_family=="Nedelec"){
-		// Nedele elements
+		// Nedelec elements
 		for(auto element : elements.get_list()){
 			Nedelec new_element(element, arg_family, arg_order);
-			Nelements.add_entity(new_element);
+			curl_conf.add_entity(new_element);
 		}
 	}
 	// Permanently erase the uncategorazed elements list

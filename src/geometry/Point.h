@@ -29,12 +29,12 @@ public:
 
 protected:
 	// Attributes to be inherited
+	double coord_x, coord_y, coord_z;
+	bool dof = true;
+	double boundary_condition;
 	// Overloaded methods
 
 private:
 	// Attributes
-	double coord_x, coord_y, coord_z;
-	bool dof = true;
-	double boundary_condition;
 	// Private methods
 };

@@ -32,18 +32,19 @@ public:
 
 protected:
 	// Attributes to be inherited
-	std::string family;
-	int polynomial_order;
-	// Overloaded methods
-
-private:
-	// Attributes
 	Shape type;
 	int curvilinear_order;
 
 	EntityList<Point>   nodes;
 	EntityList<Line>    edges;
 	EntityList<Surface> faces;
+
+	std::string family;
+	int polynomial_order;
+	// Overloaded methods
+
+private:
+	// Attributes
 	// Private methods
 	void init_edges();
 	void init_faces();

@@ -27,23 +27,31 @@ void Mesh::print_mesh(){
 	std::cout << "------------------------------" << "\n";
 
 	for(int j=1; j<=nelements; j++){
-		Element element = elements.get_entity(j);
-		std::cout << "\n(global idx=" << element.get_index() << ")   ";
-		// Initialise the local index for the nodes
-		int local_node_idx=1;
-		for(auto node : element.get_nodes().get_list()){
-			// Print the nodes
-			std::cout << "v" << local_node_idx << "=" << node.get_index() << ", ";
-			local_node_idx++;
-		}
+		if(element_family=="Lagrange"){
+			Lagrange element = lagrangian.get_entity(j);
+			std::cout << "\n(global idx=" << element.get_index() << ")   ";
+			// Initialise the local index for the nodes
+			int local_node_idx=1;
+			for(auto node : element.get_dofs().get_list()){
+				// Print the nodes
+				std::cout << "v" << local_node_idx << "=" << node.get_index() << ", ";
+				local_node_idx++;
+			}
 
-		std::cout << "\n                  ";
-		// Initialise the local index for the edges
-		int local_edge_idx=1;
-		for(auto edge : element.get_edges().get_list()){
-			// Print the edges
-			std::cout << "e" << local_edge_idx << "=" << edge.get_index() << ", ";
-			local_edge_idx++;
+			std::cout << "\n                  ";
+			// Initialise the local index for the edges
+			int local_edge_idx=1;
+			for(auto edge : element.get_edges().get_list()){
+				// Print the edges
+				std::cout << "e" << local_edge_idx << "=" << edge.get_index() << ", ";
+				local_edge_idx++;
+			}
+		}
+		else if(element_family=="Nedelec"){
+			//
+		}
+		else{
+			//
 		}
 	}
 
