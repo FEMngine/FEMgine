@@ -49,6 +49,7 @@ private:
 	int nedges;
 	int nfaces;
 	int polynomial_order;
+	int geometrical_order;
 	std::string element_type;
 	std::string element_family; 
 	// Private methods

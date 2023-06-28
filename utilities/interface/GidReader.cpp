@@ -54,6 +54,8 @@ void GidReader::process(std::string arg_family, int arg_order){
 	build_dofs(&arg_family, &arg_order);
 	// Initialise the mesh charateristics with the updated info
 	init(&arg_family, &arg_order);
+	// Permanently erase the uncategorazed elements list
+	elements.clear();
 	// Write mesh into separate files
 	write_mesh();
 }
@@ -213,20 +215,25 @@ void GidReader::rearrange(){
 
 void GidReader::build_dofs(std::string* arg_family, int* arg_order){
 	// Initialise Element's child class
-	if(*arg_family=="Lagrange"){
-		// Lagrange elements
+	if(*arg_family=="Lagrange"){	
 		for(auto element : elements.get_list()){
+			// Populate the Lagrange elements's list
 			Lagrange new_element(element, arg_family, arg_order);
 			lagrangian.add_entity(new_element);
+			// Populate the DOFs' list
+			EntityList<DOF> elemental_dofs = new_element.get_dofs();
+			for(auto dof : elemental_dofs.get_list()){
+				dofs.add_entity(dof);
+			}
 		}
 	}
 	else if(*arg_family=="Nedelec"){
-		// Nedelec elements
+		
 		for(auto element : elements.get_list()){
+			// Populate the Nedelec elements's list
 			Nedelec new_element(element, arg_family, arg_order);
 			curl_conf.add_entity(new_element);
+			// Populate the DOFs' list (TO BE WRITTEN LATER)
 		}
 	}
-	// Permanently erase the uncategorazed elements list
-	// elements.clear();
 }
