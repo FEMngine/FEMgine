@@ -223,7 +223,9 @@ void GidReader::build_dofs(std::string* arg_family, int* arg_order){
 			// Populate the DOFs' list
 			EntityList<DOF> elemental_dofs = new_element.get_dofs();
 			for(auto dof : elemental_dofs.get_list()){
-				dofs.add_entity(dof);
+				if(!dofs.it_exists(&dof)){
+					dofs.add_entity(dof);
+				}
 			}
 		}
 	}
