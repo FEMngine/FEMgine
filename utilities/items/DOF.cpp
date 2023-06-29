@@ -26,24 +26,24 @@ double DOF::get_f(){
 	return f_value;
 }
 
-
 double DOF::get_Fx(){
 	return Fx_value;
 }
-
 
 double DOF::get_Fy(){
 	return Fy_value;
 }
 
-
 double DOF::get_Fz(){
 	return Fz_value;
 }
 
-
 std::vector<double> DOF::get_F(){
 	return F_value;
+}
+
+std::vector<int> DOF::get_supp(){
+	return support;
 }
 
 
@@ -63,6 +63,16 @@ void DOF::update(double arg_Fx, double arg_Fy, double arg_Fz){
 		F_value[1] = Fy_value;
 		F_value[2] = Fz_value;
 	}
+}
+
+
+void DOF::update(int arg_index){
+	for(int j=0; j<support.size(); j++){
+		if(support[j]==arg_index){
+			return;
+		}
+	}
+	support.push_back(arg_index);
 }
 
 

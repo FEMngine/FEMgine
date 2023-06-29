@@ -20,8 +20,10 @@ public:
 	double get_Fy();
 	double get_Fz();
 	std::vector<double> get_F();
+	std::vector<int> get_supp();
 	// Other methods
 	void update(double arg_Fx, double arg_Fy=std::numeric_limits<double>::epsilon(), double arg_Fz=std::numeric_limits<double>::epsilon());
+	void update(int arg_index);
 
 protected:
 	// Attributes to be inherited
@@ -34,5 +36,6 @@ private:
 	double Fz_value;
 	double Fy_value;
 	std::vector<double> F_value;
+	std::vector<int> support;
 	// Private methods
 };
