@@ -224,6 +224,15 @@ void GidReader::build_dofs(std::string* arg_family, int* arg_order){
 			EntityList<DOF> elemental_dofs = new_element.get_dofs();
 			for(auto dof : elemental_dofs.get_list()){
 				if(!dofs.it_exists(&dof)){
+					// Populate DOF's elemental support
+					for(auto search_element : elements.get_list()){
+						for(int j=0; j<search_element.get_nodes().get_length(); j++){
+							Point node = search_element.get_nodes().get_entity(j,true);
+							if(node.get_index()==dof.get_index()){
+								dof.update(search_element.get_index());
+							}
+						}
+					}
 					dofs.add_entity(dof);
 				}
 			}

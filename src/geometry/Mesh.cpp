@@ -81,20 +81,13 @@ void Mesh::print_mesh(){
 	for(int j=1; j<=dofs.get_length(); j++){
 		DOF dof = dofs.get_entity(j);
 		std::cout << "(global idx=" << dof.get_index() << ")   ";
-		switch(dimension){
-			// Print coordinates according to the spatial dimension of the domain
-			case 1:
-			std::cout << "x=" << dof.get_x() << "\n";
-			break;
-
-			case 2:
-			std::cout << "x=" << dof.get_x() << ", " << "y=" << dof.get_y() << "\n";
-			break;
-
-			case 3:
-			std::cout << "x=" << dof.get_x() << ", " << "y=" << dof.get_y() << ", " << "z=" << dof.get_z() << "\n";
-			break;
+		std::vector<int> dof_support = dof.get_supp();
+		int local_node_idx=1;
+		for(int k=0; k<dof_support.size(); k++){
+			std::cout << "e" << local_node_idx << "=" << dof_support[k] << ", ";
+			local_node_idx++;
 		}
+		std::cout << "\n";
 	}
 	std::cout << "-------------------------------------------" << "\n";
 
@@ -138,10 +131,10 @@ void Mesh::print_mesh(){
 	std::cout << "\n--------------------Edges------------------" << "\n";
 	for(int j=1; j<=edges.get_length(); j++){
 		Line edge = edges.get_entity(j);
-		std::cout << "\n(global idx=" << edge.get_index() << ")   ";
-		std::cout << "initial point = " << edge.get_initial().get_index() <<  ", " << "final point = " << edge.get_final().get_index();
+		std::cout << "(global idx=" << edge.get_index() << ")   ";
+		std::cout << "initial point = " << edge.get_initial().get_index() <<  ", " << "final point = " << edge.get_final().get_index() << "\n";
 	}
-	std::cout << "\n-------------------------------------------" << "\n";
+	std::cout << "-------------------------------------------" << "\n";
 
 	std::cout << "\n\n ****  END MESH INFORMATION  ****" << "\n\n\n";
 }
