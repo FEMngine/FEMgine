@@ -16,7 +16,7 @@ Mesh::Mesh(){
 
 
 void Mesh::print_mesh(){
-	std::cout << "\n\n\n ****  MESH INFORMATION  ****" << "\n\n";
+	std::cout << "\n\n ****  MESH INFORMATION  ****" << "\n\n\n";
 	// Printing the recap and general info
 	std::cout << "------------------Overview-----------------" << "\n";
 	std::cout << "Type: " << element_type << "\n";
