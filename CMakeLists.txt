@@ -7,7 +7,6 @@ project(femgine LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17 REQUIRED)
 
 set(INCLUDES "include")
-message(${INCLUDES})
 set(SOURCES "src")
 set(TESTS "tutorials")
 set(UTILS "utilities")
@@ -22,19 +21,19 @@ include_directories(${INCLUDES})
 #endif()
 
 add_library(femgine STATIC 
-${UTILS}/items/Entity.cpp
-${UTILS}/items/EntityList.cpp
-${SOURCES}/geometry/Point.cpp
-${UTILS}/items/DOF.cpp
-${SOURCES}/geometry/Line.cpp
-${SOURCES}/geometry/Surface.cpp
-${SOURCES}/geometry/Shape.cpp
-${SOURCES}/geometry/Mesh.cpp
-${UTILS}/interface/MeshReader.cpp
-${UTILS}/interface/GidReader.cpp
-${SOURCES}/elements/Element.cpp
-${SOURCES}/elements/Lagrange.cpp
-${SOURCES}/elements/Nedelec.cpp
+	${UTILS}/items/Entity.cpp
+	${UTILS}/items/EntityList.cpp
+	${SOURCES}/geometry/Point.cpp
+	${UTILS}/items/DOF.cpp
+	${SOURCES}/geometry/Line.cpp
+	${SOURCES}/geometry/Surface.cpp
+	${SOURCES}/geometry/Shape.cpp
+	${SOURCES}/geometry/Mesh.cpp
+	${UTILS}/interface/MeshReader.cpp
+	${UTILS}/interface/GidReader.cpp
+	${SOURCES}/elements/Element.cpp
+	${SOURCES}/elements/Lagrange.cpp
+	${SOURCES}/elements/Nedelec.cpp
 )
 
 set_target_properties(femgine
@@ -46,6 +45,30 @@ target_include_directories(femgine PUBLIC ${INCLUDES})
 
 #set(DEPENDENCIES to-be-added-later)
 
-add_executable(test ${TESTS}/test/test.cpp)
-include_directories(test ${INCLUDES})
-target_link_libraries(test femgine ${DEPENDENCIES})
+enable_testing()
+
+# GTest
+include(FetchContent)
+
+FetchContent_Declare(googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        release-1.11.0
+)
+
+FetchContent_MakeAvailable(googletest)
+add_library(GTest::GTest INTERFACE IMPORTED)
+target_link_libraries(GTest::GTest INTERFACE gtest_main)
+
+add_executable(unit_gtest ${TESTS}/gtest/gtest.cpp)
+
+target_link_libraries(unit_gtest PRIVATE 
+	GTest::GTest
+  	femgine
+)
+
+add_test(gtests unit_gtest)
+
+# Tutorials
+add_executable(tutorial_1 ${TESTS}/test/test.cpp)
+include_directories(tutorial_1 ${INCLUDES})
+target_link_libraries(tutorial_1 femgine ${DEPENDENCIES})
