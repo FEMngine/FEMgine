@@ -13,12 +13,16 @@ int main(int argc, char* argv[]){
 	gid.print_mesh();
 
 	// Define the PDE
-	double alpha = 0.0; // Temporal coefficient
-	double beta  = 1.0; // Diffusion coefficient
-	double gamma = 1.0; // Advection coefficient
-	double delta = 1.0; // Reaction coefficient
+	double α = 0.0; // Temporal coefficient
+	double β = 1.0; // Diffusion coefficient
+	double γ = 1.0; // Advection coefficient
+	double δ = 1.0; // Reaction coefficient
+
+	// Impose the BCs
+	gid.apply_BC();
 
 	// Assemble the linear system
+	gid.assemble(α, β, γ, δ);
 
 	return 0;
 }

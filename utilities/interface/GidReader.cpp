@@ -61,6 +61,11 @@ void GidReader::process(std::string arg_family, int arg_order){
 }
 
 
+void GidReader::apply_BC(){
+	//
+}
+
+
 // PRIVATE METHODS
 
 

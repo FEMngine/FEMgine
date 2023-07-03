@@ -17,7 +17,7 @@ public:
 	// Other methods
 	void read_list();
 	void process(std::string arg_family, int arg_order);
-	void build_dofs(std::string* arg_family, int* arg_order);
+	void apply_BC();
 
 private:
 	// Attributes
@@ -28,4 +28,5 @@ private:
 	void format_entity(int arg_entity_list_index);
 	void build_missing_entity_list();
 	void rearrange();
+	void build_dofs(std::string* arg_family, int* arg_order);
 };

@@ -10,6 +10,7 @@
 #include <limits>
 #include <cmath>
 
+#include <Eigen/Dense>
 
 // ALIAS TEMPLATES
 

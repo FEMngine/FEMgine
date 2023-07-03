@@ -78,7 +78,7 @@ void Mesh::print_mesh(){
 
 	// Printing the DOFs
 	std::cout << "\n--------------------DOFs-------------------" << "\n";
-	for(int j=1; j<=dofs.get_length(); j++){
+	for(int j=1; j<=ndofs; j++){
 		DOF dof = dofs.get_entity(j);
 		std::cout << "(global idx=" << dof.get_index() << ")   ";
 		std::vector<int> dof_support = dof.get_supp();
@@ -115,7 +115,7 @@ void Mesh::print_mesh(){
 
 	// Printing the boundary nodes
 	std::cout << "\n---------------Boundary Nodes--------------" << "\n";
-	for(int j=1; j<=boundary_nodes.get_largest_index(); j++){
+	for(int j=1; j<=nBCs; j++){
 		try{
 			// Get boundary node stored at index j
 			Point node = boundary_nodes.get_entity(j);
@@ -143,6 +143,17 @@ void Mesh::write_mesh(){
 	// TO BE WRITTEN LATER
 }
 
+void Mesh::assemble(double arg_temp, double arg_diff, double arg_adv, double arg_reac){
+	// Initialise the size of the linear system
+	Stif.resize(ndofs, ndofs);
+	Source.resize(ndofs);
+	BCs.resize(nBCs);
+	
+	if(arg_temp!=0.0){
+		Mass.resize(ndofs, ndofs);
+	}
+}
+
 
 // OVERLOADED METHODS
 
@@ -161,6 +172,8 @@ void Mesh::init(std::string* arg_family, int* arg_order){
 	element_type = elements.get_entity(1).get_type();
 	
 	nnodes = inner_nodes.get_length();
+	ndofs = dofs.get_length();
+	nBCs = boundary_nodes.get_largest_index();
 	nedges = edges.get_length();
 	nfaces = faces.get_length();
 	nelements = elements.get_length();

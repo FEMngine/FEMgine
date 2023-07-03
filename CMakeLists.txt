@@ -13,12 +13,10 @@ set(UTILS "utilities")
 
 include_directories(${INCLUDES})
 
-#find_package(to-be-added-later REQUIRED)
-#if (to-be-added-later)
-#    include_directories(to-be-added-later)
-#else()
-#    message("Error: failed to locate to-be-added-later")
-#endif()
+find_package(Eigen3 REQUIRED)
+link_directories(${Eigen_INCLUDE_DIRS})
+
+set(DEPENDENCIES ${Eigen_LIBRARIES})
 
 add_library(femgine STATIC 
 	${UTILS}/items/Entity.cpp
@@ -43,7 +41,6 @@ set_target_properties(femgine
 )
 target_include_directories(femgine PUBLIC ${INCLUDES})
 
-#set(DEPENDENCIES to-be-added-later)
 
 enable_testing()
 
@@ -64,6 +61,7 @@ add_executable(unit_gtest ${TESTS}/gtest/gtest.cpp)
 target_link_libraries(unit_gtest PRIVATE 
 	GTest::GTest
   	femgine
+  	${DEPENDENCIES}
 )
 
 add_test(gtests unit_gtest)
