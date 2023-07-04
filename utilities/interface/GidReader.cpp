@@ -61,8 +61,22 @@ void GidReader::process(std::string arg_family, int arg_order){
 }
 
 
-void GidReader::apply_BC(){
-	//
+void GidReader::apply_BC(int arg_label, double arg_value, std::string arg_type){
+	EntityList<Point> new_boundary_nodes;
+	// Apply Dirichlet Boundary Conditions
+	if(arg_type=="DIR"){
+		for(int j=1; j<boundary_nodes.get_length(); j++){
+			if(boundary_nodes.get_entity(j,true).get_BClabel()==arg_label){
+				Point new_boundary_node = boundary_nodes.get_entity(j,true);
+				new_boundary_node.set_BCvalue(arg_value);
+				new_boundary_nodes.add_entity(new_boundary_node);
+			}
+		}
+	}
+	// Apply Neumann Boundary Conditions
+	else if(arg_type=="NEU"){
+		// TO BE WRITTEN LATER
+	}
 }
 
 
@@ -140,7 +154,7 @@ void GidReader::format_entity(int arg_entity_list_index){
 
 		case 3:{
 			// Boundary nodes
-			std::vector<double> boundary_node;
+			std::vector<int> boundary_node;
 			// Loop over the remaining words in the broke-up readline
 			while(sentence >> word){
 				try{
@@ -150,9 +164,9 @@ void GidReader::format_entity(int arg_entity_list_index){
 				catch(const std::invalid_argument& stod_exception){/* Do nothing here */}
 			}
 			// Create the Point object with constructor for the boundary nodes
-			Point boundaryNode(static_cast<int>(boundary_node[0]));
+			Point boundaryNode(boundary_node[0]);
 			// Set the boundary condition specified for the boundary node
-			boundaryNode.set_BC(boundary_node[1]);
+			boundaryNode.set_BClabel(boundary_node[1]);
 			// Update the corresponding entity list
 			boundary_nodes.add_entity(boundaryNode);
 			break;

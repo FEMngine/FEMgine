@@ -119,7 +119,7 @@ void Mesh::print_mesh(){
 		try{
 			// Get boundary node stored at index j
 			Point node = boundary_nodes.get_entity(j);
-			std::cout << "(global idx=" << node.get_index() << ")   " << "BC=" << node.get_BC() << "\n";
+			std::cout << "(global idx=" << node.get_index() << ")   " << "Label=" << node.get_BClabel() << "\n";
 		}
 		catch(const std::invalid_argument& stod_exception){
 			// ... unless there is no boundary node for that index, in that case just skip through

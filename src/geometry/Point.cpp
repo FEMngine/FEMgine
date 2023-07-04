@@ -53,7 +53,12 @@ double Point::get_z(){
 }
 
 
-double Point::get_BC(){
+int Point::get_BClabel(){
+	return boundary_label;
+}
+
+
+double Point::get_BCvalue(){
 	return boundary_condition;
 }
 
@@ -66,8 +71,13 @@ bool Point::is_dof(){
 }
 
 
-void Point::set_BC(double arg_BC){
-	boundary_condition = arg_BC;
+void Point::set_BClabel(int arg_BClabel){
+	boundary_label = arg_BClabel;
+}
+
+
+void Point::set_BCvalue(double arg_BCvalue){
+	boundary_condition = arg_BCvalue;
 }
 
 

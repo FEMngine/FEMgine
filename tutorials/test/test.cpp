@@ -19,7 +19,9 @@ int main(int argc, char* argv[]){
 	double δ = 1.0; // Reaction coefficient
 
 	// Impose the BCs
-	gid.apply_BC();
+	gid.apply_BC(0, 1.0);
+	gid.apply_BC(1, 2.0);
+	gid.apply_BC(0, 3.0, "NEU");
 
 	// Assemble the linear system
 	gid.assemble(α, β, γ, δ);

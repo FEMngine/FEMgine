@@ -17,7 +17,7 @@ public:
 	// Other methods
 	void read_list();
 	void process(std::string arg_family, int arg_order);
-	void apply_BC();
+	void apply_BC(int arg_label, double arg_value, std::string arg_type="DIR");
 
 private:
 	// Attributes
