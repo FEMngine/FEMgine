@@ -26,6 +26,9 @@ public:
 	double get_BCvalue();
 	// Other methods
 	bool is_dof();
+	void set_x(double arg_x);
+	void set_y(double arg_y);
+	void set_z(double arg_z);
 	void set_BClabel(int arg_BClabel);
 	void set_BCvalue(double arg_BCvalue);
 

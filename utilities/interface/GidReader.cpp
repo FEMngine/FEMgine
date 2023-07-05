@@ -210,13 +210,13 @@ void GidReader::rearrange(){
 		EntityList<Line> current = element.get_edges(); 
 		EntityList<Line> rearranged;
 		// Rearrange the edges' local index based to the element type
-		if(element.get_type()=="Triangle"){
+		if(element.get_shape().get_type()=="Triangle"){
 			// Hard coded
 			rearranged.add_entity(current.get_entity(1, true));
 			rearranged.add_entity(current.get_entity(2, true));
 			rearranged.add_entity(current.get_entity(0, true));
 		}
-		else if(element.get_type()=="Quadrilateral"){
+		else if(element.get_shape().get_type()=="Quadrilateral"){
 			// Hard coded
 			rearranged.add_entity(current.get_entity(2, true));
 			rearranged.add_entity(current.get_entity(3, true));

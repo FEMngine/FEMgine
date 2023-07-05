@@ -169,7 +169,7 @@ void Mesh::build_dofs(){/*  */};
 void Mesh::init(std::string* arg_family, int* arg_order){
 	// Initialises the fundamental information about the mesh as provided by the input raw mesh
 	dimension = inner_nodes.get_entity(1).get_dimension(); 
-	element_type = elements.get_entity(1).get_type();
+	element_type = elements.get_entity(1).get_shape().get_type();
 	
 	nnodes = inner_nodes.get_length();
 	ndofs = dofs.get_length();

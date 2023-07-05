@@ -12,18 +12,41 @@ Shape::Shape(){
 // ACCESSORS
 
 
-std::string Shape::get_shape(){
-	return shape;
+std::string Shape::get_type(){
+	return type;
 }
 
-void Shape::init_shape(std::string arg_shape){
-	shape = arg_shape;
+Point Shape::get_G(){
+	return centroid;
+}
+
+double Shape::get_area(){
+	return area;
+}
+
+
+// OTHER METHODS
+
+
+void Shape::init_type(std::string arg_type, EntityList<Point>* arg_nodes){
+	// Initialise the type string
+	type = arg_type;
+	// Compute the centroid
+	double Xg=0.0, Yg=0.0;
+	for(int j=0; j<arg_nodes -> get_length(); j++){
+		Xg += arg_nodes -> get_entity(j,true) -> get_x();
+		Yg += arg_nodes -> get_entity(j,true) -> get_y();
+	}
+	centroid.set_x(Xg/3.0);
+	centroid.set_y(Yg/3.0);
+	// Compute the area (as the determinant of the three vertice's coordinates)
+	area = 0.5*((arg_nodes -> get_entity(1,true) -> get_x())*(arg_nodes -> get_entity(2,true) -> get_y() - arg_nodes -> get_entity(3,true) -> get_y()) - (arg_nodes -> get_entity(1,true) -> get_y())*(arg_nodes -> get_entity(2,true) -> get_x() - arg_nodes -> get_entity(3,true) -> get_x()) + ((arg_nodes -> get_entity(2,true) -> get_x())*(arg_nodes -> get_entity(3,true) -> get_y())) - ((arg_nodes -> get_entity(3,true) -> get_x())*(arg_nodes -> get_entity(2,true) -> get_y())));
 }
 
 matrix<int> Shape::sort_edges(EntityList<Point>* arg_nodes){
 	int it;
 	for(it=0; it<4; it++){
-		if(shape==shape_list[it]){
+		if(type==shapes[it]){
 			break;
 		}
 	}
@@ -82,11 +105,6 @@ matrix<int> Shape::sort_edges(EntityList<Point>* arg_nodes){
 		break;
 	}
 
-	return iterable_nodes;
-}
-
-matrix<int> Shape::sort_faces(){
-	matrix<int> iterable_nodes;
 	return iterable_nodes;
 }
 
