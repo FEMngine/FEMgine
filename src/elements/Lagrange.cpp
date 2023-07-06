@@ -14,7 +14,7 @@ Lagrange::Lagrange(Element &copy_element, std::string* arg_family, int* arg_orde
 	edges = copy_element.get_edges();
 
 	dimension = nodes.get_head().get_dimension();
-	type.init_shape(copy_element.get_type());
+	type.init_type(copy_element.get_shape().get_type(), &nodes);
 
 	family = *arg_family;
 	polynomial_order = *arg_order;

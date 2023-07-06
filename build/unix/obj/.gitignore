@@ -1,6 +1,0 @@
-# This file is necessary in order to push the empty directory obj to origin
-
-# Ignore everything in this directory...
-*
-# ...except for this file
-!.gitignore

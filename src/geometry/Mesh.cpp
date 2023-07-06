@@ -65,6 +65,10 @@ void Mesh::print_mesh(){
 				std::cout << "e" << local_edge_idx << "=" << edge.get_index() << ", ";
 				local_edge_idx++;
 			}
+			std::cout << "\n                  ";
+			std::cout << "G = (" << element.get_shape().get_G().get_x() << ", " << element.get_shape().get_G().get_y() << ")";
+			std::cout << "\n                  ";
+			std::cout << "area = " << element.get_shape().get_area();
 			std::cout << "\n";
 		}
 		else if(element_family=="Nedelec"){
