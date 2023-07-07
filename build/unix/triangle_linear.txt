@@ -1,0 +1,395 @@
+ENTITIES
+POINT
+Num: 1 HigherEntity: 2 conditions: 0 material: 0
+LAYER: Layer0
+Coord: 0.0 0.0 0.0
+END POINT
+POINT
+Num: 2 HigherEntity: 2 conditions: 0 material: 0
+LAYER: Layer0
+Meshing Info: (num=5,NOE=2) Elemtype=0 IsStructured=0 Meshing=Default size=0.1
+Coord: 1.0 0.0 0.0
+END POINT
+POINT
+Num: 3 HigherEntity: 2 conditions: 0 material: 0
+LAYER: Layer0
+Coord: 1.0 1.0 0.0
+END POINT
+POINT
+Num: 4 HigherEntity: 2 conditions: 0 material: 0
+LAYER: Layer0
+Meshing Info: (num=5,NOE=2) Elemtype=0 IsStructured=0 Meshing=Default size=0.1
+Coord: 0.0 1.0 0.0
+END POINT
+STLINE
+Num: 1 HigherEntity: 1 conditions: 1 material: 0
+LAYER: Layer0
+Points: 1 2
+END STLINE
+STLINE
+Num: 2 HigherEntity: 1 conditions: 1 material: 0
+LAYER: Layer0
+Meshing Info: (num=3,NOE=1) Elemtype=0 IsStructured=0 Meshing=Default size=0.1
+Points: 2 3
+END STLINE
+STLINE
+Num: 3 HigherEntity: 1 conditions: 1 material: 0
+LAYER: Layer0
+Points: 3 4
+END STLINE
+STLINE
+Num: 4 HigherEntity: 1 conditions: 1 material: 0
+LAYER: Layer0
+Points: 4 1
+END STLINE
+NURBSURFACE
+Num: 1 HigherEntity: 0 conditions: 0 material: 0
+LAYER: Layer0
+Meshing Info: (num=1,NOE=1) Elemtype=2 IsStructured=0 Meshing=Default size=0
+NumLines: 4
+Line: 1 Orientation: SAME1ST
+Line: 2 Orientation: SAME1ST
+Line: 3 Orientation: SAME1ST
+Line: 4 Orientation: SAME1ST
+Number of Control Points= 2 2 Degree= 1 1
+Point 1,1 coords:-0.050000000000000044,-0.050000000000000044,0.0
+Point 1,2 coords:1.05,-0.050000000000000044,0.0
+Point 2,1 coords:-0.050000000000000044,1.05,0.0
+Point 2,2 coords:1.05,1.05,0.0
+Number of knots in U= 4
+knot 1 value=0.0
+knot 2 value=0.0
+knot 3 value=1.0
+knot 4 value=1.0
+Number of knots in V= 4
+knot 1 value=0.0
+knot 2 value=0.0
+knot 3 value=1.0
+knot 4 value=1.0
+Non rational
+IsTrimmed: 1
+Center: 0.5 0.5 0.0
+Normal: 0.0 0.0 1.0
+END NURBSURFACE
+END ENTITIES
+MESH dimension 3 ElemType Triangle Nnode 3
+Coordinates
+    1               0               0               0
+    2     0.246096318               0               0
+    3               0     0.246096318               0
+    4     0.216506351     0.369144477               0
+    5     0.438206794     0.220505056               0
+    6     0.492192636               0               0
+    7               0     0.492192636               0
+    8     0.489442525     0.433380803               0
+    9     0.302953755     0.615883989               0
+   10     0.714174187               0               0
+   11               0     0.714174187               0
+   12     0.746796143             0.3               0
+   13     0.554831718     0.613886537               0
+   14     0.196629711     0.834041282               0
+   15     0.880502735               0               0
+   16               0     0.880502735               0
+   17      0.87293655     0.141666667               0
+   18     0.769235756         0.49875               0
+   19     0.903175785     0.258333333               0
+   20     0.465730413     0.821417896               0
+   21     0.896146234            0.35               0
+   22               1               0               0
+   23               0               1               0
+   24               1             0.1               0
+   25     0.116729519               1               0
+   26               1             0.2               0
+   27     0.914639942         0.45775               0
+   28     0.746796143             0.7               0
+   29     0.276529904               1               0
+   30               1             0.3               0
+   31     0.907817722            0.54               0
+   32               1             0.4               0
+   33     0.896146234            0.65               0
+   34      0.49143626               1               0
+   35               1             0.5               0
+   36               1             0.6               0
+   37     0.903155661     0.741666667               0
+   38               1             0.7               0
+   39     0.872835929     0.858333333               0
+   40     0.713748452               1               0
+   41               1             0.8               0
+   42     0.880324744               1               0
+   43               1             0.9               0
+   44               1               1               0
+End Coordinates
+
+Elements
+1 22 24 15
+2 32 35 27
+3 41 43 39
+4 26 30 19
+5 36 38 33
+6 24 26 17
+7 35 36 31
+8 43 44 42
+9 30 32 21
+10 38 41 37
+11 27 35 31
+12 27 31 18
+13 19 30 21
+14 19 21 12
+15 17 26 19
+16 17 19 12
+17 21 32 27
+18 21 27 18
+19 39 43 42
+20 33 38 37
+21 33 37 28
+22 31 36 33
+23 31 33 18
+24 37 41 39
+25 37 39 28
+26 24 17 15
+27 25 23 16
+28 39 42 40
+29 15 17 10
+30 18 33 28
+31 12 21 18
+32 29 25 14
+33 16 11 14
+34 25 16 14
+35 29 14 20
+36 18 28 13
+37 12 18 8
+38 17 12 10
+39 28 39 40
+40 34 29 20
+41 34 20 40
+42 20 14 9
+43 6 10 12
+44 40 20 28
+45 11 7 9
+46 14 11 9
+47 13 28 20
+48 18 13 8
+49 8 13 9
+50 9 13 20
+51 12 5 6
+52 1 2 3
+53 2 6 5
+54 7 3 4
+55 5 12 8
+56 2 4 3
+57 4 2 5
+58 4 5 8
+59 7 4 9
+60 9 4 8
+End Elements
+PROBLEM DATA
+Problem_Type#CB#(Steady)  value: Steady
+ASCII_Output#CB#(Yes,No)  value: No
+Scale_Factor  value: 1.0
+Problem_Title  value: Untitled
+END PROBLEM DATA
+NUMBER: 1 MATERIAL: Material-Test-1
+TITLE: Conductivity
+QUESTION: X-THERMAL_COEFF
+VALUE: 2.1e11
+HELP: Thermal conductivity value on x direcction
+QUESTION: Y-THERMAL_COEFF
+VALUE: 2.1e11
+HELP: Thermal conductivity value on y direcction
+QUESTION: Z-THERMAL_COEFF
+VALUE: 2.1e11
+HELP: Thermal conductivity value on z direcction
+QUESTION: DENSITY
+VALUE: 78000
+HELP: Material Density
+QUESTION: SPECIFIC_HEAT
+VALUE: 1.5e6
+HELP: Material Specific Heat
+QUESTION: HEAT_SOURCE_VALUE
+VALUE: 3.0
+HELP: Heat source value
+QUESTION: ACTIVATE_HEAT_SOURCE#CB#(Yes,No)
+VALUE: No
+HELP: Heat source value activation flag
+image: logo1.gif
+TITLE: Radiation
+QUESTION: RADIATION_COEFF
+VALUE: 0.5
+HELP: Boundary Convection-Radiation coefficient
+image: logo1.gif
+END MATERIAL
+NUMBER: 2 MATERIAL: Material-Test-2
+TITLE: Conductivity
+QUESTION: X-THERMAL_COEFF
+VALUE: 2.1e11
+HELP: Thermal conductivity value on x direcction
+QUESTION: Y-THERMAL_COEFF
+VALUE: 2.1e11
+HELP: Thermal conductivity value on y direcction
+QUESTION: Z-THERMAL_COEFF
+VALUE: 2.1e11
+HELP: Thermal conductivity value on z direcction
+QUESTION: DENSITY
+VALUE: 78000
+HELP: Material Density
+QUESTION: SPECIFIC_HEAT
+VALUE: 1.5e6
+HELP: Material Specific Heat
+QUESTION: HEAT_SOURCE_VALUE
+VALUE: 3.0
+HELP: Heat source value
+QUESTION: ACTIVATE_HEAT_SOURCE#CB#(Yes,No)
+VALUE: No
+HELP: Heat source value activation flag
+image: logo1.gif
+TITLE: Radiation
+QUESTION: RADIATION_COEFF
+VALUE: 0.5
+HELP: Boundary Convection-Radiation coefficient
+image: logo1.gif
+END MATERIAL
+INTERVAL NUMBER: 1
+NUMBER: 1 CONDITION: Point_Temperature
+CONDTYPE: over points
+CONDMESHTYPE: over nodes
+QUESTION: Temperature_Value
+VALUE: 0.0
+HELP: Value of the fixed temperature over points
+image: logo1.gif
+END CONDITION
+Geometry Entities
+End Geometry Entities
+Mesh Entities
+End Mesh Entities
+NUMBER: 2 CONDITION: Line_Temperature
+CONDTYPE: over lines
+CONDMESHTYPE: over nodes
+QUESTION: Temperature_Value
+VALUE: 0.0
+HELP: Value of the fixed temperature over lines
+image: logo1.gif
+END CONDITION
+Geometry Entities
+    1  Conds: 0 
+    3  Conds: 0 
+    4  Conds: 0 
+    2  Conds: 1 
+End Geometry Entities
+Boundary Nodes
+N     1  Conds: 0 
+N    22  Conds: 0 
+N     2  Conds: 0 
+N     6  Conds: 0 
+N    10  Conds: 0 
+N    15  Conds: 0 
+N    22  Conds: 1 
+N    44  Conds: 1 
+N    24  Conds: 1 
+N    26  Conds: 1 
+N    30  Conds: 1 
+N    32  Conds: 1 
+N    35  Conds: 1 
+N    36  Conds: 1 
+N    38  Conds: 1 
+N    41  Conds: 1 
+N    43  Conds: 1 
+N    44  Conds: 0 
+N    23  Conds: 0 
+N    42  Conds: 0 
+N    40  Conds: 0 
+N    34  Conds: 0 
+N    29  Conds: 0 
+N    25  Conds: 0 
+N     1  Conds: 0 
+N    23  Conds: 0 
+N    16  Conds: 0 
+N    11  Conds: 0 
+N     7  Conds: 0 
+N     3  Conds: 0 
+End Boundary Nodes
+NUMBER: 3 CONDITION: Surface_Temperature
+CONDTYPE: over surfaces
+CONDMESHTYPE: over nodes
+QUESTION: Temperature_Value
+VALUE: 0.0
+HELP: Value of the fixed temperature over surfaces
+image: logo1.gif
+END CONDITION
+Geometry Entities
+End Geometry Entities
+Mesh Entities
+End Mesh Entities
+NUMBER: 4 CONDITION: Volume_Temperature
+CONDTYPE: over volumes
+CONDMESHTYPE: over nodes
+QUESTION: Temperature_Value
+VALUE: 0.0
+HELP: Value of the fixed temperature over volumes
+image: logo1.gif
+END CONDITION
+Geometry Entities
+End Geometry Entities
+Mesh Entities
+End Mesh Entities
+NUMBER: 5 CONDITION: Line_External_Temperature
+CONDTYPE: over lines
+CONDMESHTYPE: over face elements
+QUESTION: External_Temperature
+VALUE: 0.0
+HELP: Value of the environmental temperature arround lines NOT allowed over 3D elements
+image: logo1.gif
+END CONDITION
+Geometry Entities
+End Geometry Entities
+Mesh Entities
+End Mesh Entities
+NUMBER: 6 CONDITION: Surface_External_Temperature
+CONDTYPE: over surfaces
+CONDMESHTYPE: over face elements
+QUESTION: External_Temperature
+VALUE: 0.0
+HELP: Value of the environmental temperature arround surfaces
+image: logo1.gif
+END CONDITION
+Geometry Entities
+End Geometry Entities
+Mesh Entities
+End Mesh Entities
+NUMBER: 7 CONDITION: Point_Flux_over_points
+CONDTYPE: over points
+CONDMESHTYPE: over nodes
+QUESTION: Flux
+VALUE: 0.0
+HELP: Value of the concentrated flux over the point
+image: logo1.gif
+END CONDITION
+Geometry Entities
+End Geometry Entities
+Mesh Entities
+End Mesh Entities
+NUMBER: 8 CONDITION: Line_Flux_over_line
+CONDTYPE: over lines
+CONDMESHTYPE: over face elements
+QUESTION: Flux
+VALUE: 0.0
+HELP: Value of the normal flux over the line per longitude unit
+image: logo1.gif
+END CONDITION
+Geometry Entities
+End Geometry Entities
+Mesh Entities
+End Mesh Entities
+NUMBER: 9 CONDITION: Surface_Flux_over_surface
+CONDTYPE: over surfaces
+CONDMESHTYPE: over face elements
+QUESTION: Flux
+VALUE: 0.0
+HELP: Value of the normal flux over the surface
+image: logo1.gif
+END CONDITION
+Geometry Entities
+End Geometry Entities
+Mesh Entities
+End Mesh Entities
+INTERVAL DATA
+END INTERVAL DATA

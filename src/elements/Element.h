@@ -20,7 +20,7 @@ public:
 	~Element() = default;
 
 	// Accessors
-	std::string get_type();
+	Shape get_shape();
 	std::string get_family();
 	int get_poly_order();
 	int get_curve_order();

@@ -6,9 +6,6 @@
 
 Element::Element(): Entity(){
 	// Default constructor
-	dimension = 2;
-	type.init_shape("Triangles");
-	curvilinear_order = 1;
 }
 
 Element::Element(int arg_global_index, std::vector<Point> arg_nodes): Entity(arg_global_index){
@@ -35,7 +32,7 @@ Element::Element(Element &copy_element, EntityList<Line> arg_edges): Entity(copy
 
 	dimension = nodes.get_head().get_dimension();
 	
-	type.init_shape(copy_element.get_type());
+	type.init_type(copy_element.get_shape().get_type(), &nodes);
 	family = copy_element.get_family();
 
 	curvilinear_order = 1;
@@ -45,8 +42,8 @@ Element::Element(Element &copy_element, EntityList<Line> arg_edges): Entity(copy
 // ACCESSORS
 
 
-std::string Element::get_type(){
-	return type.get_shape();
+Shape Element::get_shape(){
+	return type;
 }
 
 std::string Element::get_family(){
@@ -87,14 +84,15 @@ void Element::init_edges(){
 	if(dimension < 2){
 		return;
 	}
-	else
-	{
+	else{
 		matrix<int> iterable_nodes = type.sort_edges(&nodes);
 		for(int row=0; row<iterable_nodes.size(); row++){
 			Line edge(nodes.get_entity(iterable_nodes[row][0]), nodes.get_entity(iterable_nodes[row][1]));
 			edges.add_entity(edge);
 		}
 		//std::cout << edges.get_length() << "\n";
+
+		//
 		return;
 	}
 }
@@ -112,10 +110,10 @@ void Element::init_faces(){
 void Element::infere_type(){
 	if(dimension==2){
 		if(nodes.get_length()==3){
-			type.init_shape("Triangle");
+			type.init_type("Triangle", &nodes);
 		}
 		else if(nodes.get_length()==4){
-			type.init_shape("Quadrilateral");
+			type.init_type("Quadrilateral", &nodes);
 		}
 	}
 	else if(dimension==3){

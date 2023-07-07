@@ -22,15 +22,21 @@ public:
 	double get_x();
 	double get_y();
 	double get_z();
-	double get_BC();
+	int get_BClabel();
+	double get_BCvalue();
 	// Other methods
 	bool is_dof();
-	void set_BC(double arg_BC);
+	void set_x(double arg_x);
+	void set_y(double arg_y);
+	void set_z(double arg_z);
+	void set_BClabel(int arg_BClabel);
+	void set_BCvalue(double arg_BCvalue);
 
 protected:
 	// Attributes to be inherited
 	double coord_x, coord_y, coord_z;
 	bool dof = true;
+	int boundary_label;
 	double boundary_condition;
 	// Overloaded methods
 

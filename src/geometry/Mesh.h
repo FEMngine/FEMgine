@@ -22,6 +22,8 @@ public:
 	void print_mesh();
 	void write_mesh();
 
+	void assemble(double arg_temp, double arg_diff, double arg_adv, double arg_reac);
+
 protected:
 	// Attributes to be inherited
 	EntityList<Point>   inner_nodes;
@@ -34,6 +36,12 @@ protected:
 	EntityList<Element>  elements;
 	EntityList<Lagrange> lagrangian;
 	EntityList<Nedelec>  curl_conf;
+
+	Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> Stif;
+	Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> Mass;
+	Eigen::Vector<double, Eigen::Dynamic> Source;
+	Eigen::Vector<double, Eigen::Dynamic> BCs;
+
 	// Overloaded methods
 	virtual void process();
 	virtual void build_dofs();
@@ -45,6 +53,7 @@ private:
 	int dimension;
 	int nnodes;
 	int ndofs;
+	int nBCs;
 	int nelements;
 	int nedges;
 	int nfaces;

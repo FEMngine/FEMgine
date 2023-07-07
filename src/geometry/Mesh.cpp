@@ -16,7 +16,7 @@ Mesh::Mesh(){
 
 
 void Mesh::print_mesh(){
-	std::cout << "\n\n\n ****  MESH INFORMATION  ****" << "\n\n";
+	std::cout << "\n\n ****  MESH INFORMATION  ****" << "\n\n\n";
 	// Printing the recap and general info
 	std::cout << "------------------Overview-----------------" << "\n";
 	std::cout << "Type: " << element_type << "\n";
@@ -65,6 +65,10 @@ void Mesh::print_mesh(){
 				std::cout << "e" << local_edge_idx << "=" << edge.get_index() << ", ";
 				local_edge_idx++;
 			}
+			std::cout << "\n                  ";
+			std::cout << "G = (" << element.get_shape().get_G().get_x() << ", " << element.get_shape().get_G().get_y() << ")";
+			std::cout << "\n                  ";
+			std::cout << "area = " << element.get_shape().get_area();
 			std::cout << "\n";
 		}
 		else if(element_family=="Nedelec"){
@@ -78,7 +82,7 @@ void Mesh::print_mesh(){
 
 	// Printing the DOFs
 	std::cout << "\n--------------------DOFs-------------------" << "\n";
-	for(int j=1; j<=dofs.get_length(); j++){
+	for(int j=1; j<=ndofs; j++){
 		DOF dof = dofs.get_entity(j);
 		std::cout << "(global idx=" << dof.get_index() << ")   ";
 		std::vector<int> dof_support = dof.get_supp();
@@ -119,7 +123,7 @@ void Mesh::print_mesh(){
 		try{
 			// Get boundary node stored at index j
 			Point node = boundary_nodes.get_entity(j);
-			std::cout << "(global idx=" << node.get_index() << ")   " << "BC=" << node.get_BC() << "\n";
+			std::cout << "(global idx=" << node.get_index() << ")   " << "Label=" << node.get_BClabel() << ",   BC=" << node.get_BCvalue() << "\n";
 		}
 		catch(const std::invalid_argument& stod_exception){
 			// ... unless there is no boundary node for that index, in that case just skip through
@@ -143,6 +147,17 @@ void Mesh::write_mesh(){
 	// TO BE WRITTEN LATER
 }
 
+void Mesh::assemble(double arg_temp, double arg_diff, double arg_adv, double arg_reac){
+	// Initialise the size of the linear system
+	Stif.resize(ndofs, ndofs);
+	Source.resize(ndofs);
+	BCs.resize(nBCs);
+	
+	if(arg_temp!=0.0){
+		Mass.resize(ndofs, ndofs);
+	}
+}
+
 
 // OVERLOADED METHODS
 
@@ -158,9 +173,10 @@ void Mesh::build_dofs(){/*  */};
 void Mesh::init(std::string* arg_family, int* arg_order){
 	// Initialises the fundamental information about the mesh as provided by the input raw mesh
 	dimension = inner_nodes.get_entity(1).get_dimension(); 
-	element_type = elements.get_entity(1).get_type();
+	element_type = elements.get_entity(1).get_shape().get_type();
 	
 	nnodes = inner_nodes.get_length();
+	ndofs = dofs.get_length();
 	nedges = edges.get_length();
 	nfaces = faces.get_length();
 	nelements = elements.get_length();
