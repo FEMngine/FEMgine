@@ -22,6 +22,7 @@ public:
 private:
 	// Attributes
 	EntityList<Element> temp_elements;
+	EntityList<Point> temp_bnodes;
 	// Private methods
 	void set_endlines();
 	void set_position();

@@ -65,18 +65,33 @@ void GidReader::apply_BC(int arg_label, double arg_value, std::string arg_type){
 	EntityList<Point> new_boundary_nodes;
 	// Apply Dirichlet Boundary Conditions
 	if(arg_type=="DIR"){
-		for(int j=1; j<boundary_nodes.get_length(); j++){
-			if(boundary_nodes.get_entity(j,true).get_BClabel()==arg_label){
-				Point new_boundary_node = boundary_nodes.get_entity(j,true);
+		for(int j=1; j<temp_bnodes.get_length(); j++){
+			Point new_boundary_node = temp_bnodes.get_entity(j,true);
+			if(temp_bnodes.get_entity(j,true).get_BClabel()==arg_label){
 				new_boundary_node.set_BCvalue(arg_value);
+				new_boundary_nodes.add_entity(new_boundary_node);
+			}
+			else{
 				new_boundary_nodes.add_entity(new_boundary_node);
 			}
 		}
 	}
 	// Apply Neumann Boundary Conditions
 	else if(arg_type=="NEU"){
-		// TO BE WRITTEN LATER
+		for(int j=1; j<temp_bnodes.get_length(); j++){
+			Point new_boundary_node = temp_bnodes.get_entity(j,true);
+			if(temp_bnodes.get_entity(j,true).get_BClabel()==arg_label){
+				new_boundary_node.set_BCvalue(arg_value);
+				new_boundary_nodes.add_entity(new_boundary_node);
+			}
+			else{
+				new_boundary_nodes.add_entity(new_boundary_node);
+			}
+		}
 	}
+	boundary_nodes.fill_in(&new_boundary_nodes);
+	temp_bnodes.clear();
+	temp_bnodes.fill_in(&boundary_nodes);
 }
 
 
@@ -168,7 +183,7 @@ void GidReader::format_entity(int arg_entity_list_index){
 			// Set the boundary condition specified for the boundary node
 			boundaryNode.set_BClabel(boundary_node[1]);
 			// Update the corresponding entity list
-			boundary_nodes.add_entity(boundaryNode);
+			temp_bnodes.add_entity(boundaryNode);
 			break;
 		}
 	}

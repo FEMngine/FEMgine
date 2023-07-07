@@ -119,11 +119,11 @@ void Mesh::print_mesh(){
 
 	// Printing the boundary nodes
 	std::cout << "\n---------------Boundary Nodes--------------" << "\n";
-	for(int j=1; j<=nBCs; j++){
+	for(int j=1; j<=boundary_nodes.get_largest_index(); j++){
 		try{
 			// Get boundary node stored at index j
 			Point node = boundary_nodes.get_entity(j);
-			std::cout << "(global idx=" << node.get_index() << ")   " << "Label=" << node.get_BClabel() << "\n";
+			std::cout << "(global idx=" << node.get_index() << ")   " << "Label=" << node.get_BClabel() << ",   BC=" << node.get_BCvalue() << "\n";
 		}
 		catch(const std::invalid_argument& stod_exception){
 			// ... unless there is no boundary node for that index, in that case just skip through
@@ -177,7 +177,6 @@ void Mesh::init(std::string* arg_family, int* arg_order){
 	
 	nnodes = inner_nodes.get_length();
 	ndofs = dofs.get_length();
-	nBCs = boundary_nodes.get_largest_index();
 	nedges = edges.get_length();
 	nfaces = faces.get_length();
 	nelements = elements.get_length();
