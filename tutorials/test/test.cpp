@@ -8,13 +8,12 @@ int main(int argc, char* argv[]){
 
 	// Read the raw mesh and process it
 	GidReader gid("triangle_linear.txt");
-	gid.read_list();
 	gid.process(family, order);
 
 	// Impose the BCs
 	gid.apply_BC(0, 10.5);
 	gid.apply_BC(1, 5.3);
-	gid.apply_BC(2, 3.0, "NEU");
+	gid.apply_BC(2, 3.1, "NEU");
 
 	// Print the mesh (debug purposes)
 	gid.print_mesh();

@@ -10,6 +10,7 @@ GidReader::GidReader(): MeshReader(){
 
 GidReader::GidReader(std::string arg_filename): MeshReader(arg_filename){
 	// Parametric constructor
+	read_list();
 }
 
 
@@ -56,8 +57,6 @@ void GidReader::process(std::string arg_family, int arg_order){
 	init(&arg_family, &arg_order);
 	// Permanently erase the uncategorazed elements list
 	elements.clear();
-	// Write mesh into separate files
-	write_mesh();
 }
 
 
@@ -136,7 +135,7 @@ void GidReader::format_entity(int arg_entity_list_index){
 	switch(arg_entity_list_index){
 	
 		case 1:{
-			// Coordinates (inner_nodes)
+			// Nodes
 			sentence >> word;
 			int global_index = std::stoi(word);
 
@@ -147,7 +146,7 @@ void GidReader::format_entity(int arg_entity_list_index){
 			}
 
 			// Update the entity list of the class
-			inner_nodes.add_entity(Point(global_index, coordinates[0], coordinates[1]));
+			nodes.add_entity(Point(global_index, coordinates[0], coordinates[1]));
 			break;
 		}
 
@@ -159,7 +158,7 @@ void GidReader::format_entity(int arg_entity_list_index){
 			std::vector<Point> nodes_indices;
 			// Loop over the remaining words in the broke-up readline
 			while(sentence >> word){
-				nodes_indices.push_back(inner_nodes.get_entity(std::stoi(word)));
+				nodes_indices.push_back(nodes.get_entity(std::stoi(word)));
 			}
 
 			// Update the entity list of the class
@@ -248,11 +247,28 @@ void GidReader::rearrange(){
 }
 
 void GidReader::build_dofs(std::string* arg_family, int* arg_order){
+	// Fill in the inner_nodes attritube of parent's Mesh class
+	update_nodes();
 	// Initialise Element's child class
 	if(*arg_family=="Lagrange"){	
 		for(auto element : elements.get_list()){
+			// Check whether the nodes in the Element's parent class are indeed al DOFs
+			EntityList<Point> new_elemental_nodes;
+			EntityList<Point> elemental_nodes = element.get_nodes();
+			for(int j=0; j<elemental_nodes.get_length(); j++){
+				Point elemental_node = elemental_nodes.get_entity(j,true);
+				bool is_dof=false;
+				for(int k=0; k<inner_nodes.get_length(); k++){
+					Point inner_node = inner_nodes.get_entity(k,true);
+					if(elemental_node.get_index()==inner_node.get_index()){
+						is_dof=true;
+					}
+				}
+				elemental_node.set_dof(is_dof);
+				new_elemental_nodes.add_entity(elemental_node);
+			}
 			// Populate the Lagrange elements's list
-			Lagrange new_element(element, arg_family, arg_order);
+			Lagrange new_element(element, new_elemental_nodes, arg_family, arg_order);
 			lagrangian.add_entity(new_element);
 			// Populate the DOFs' list
 			EntityList<DOF> elemental_dofs = new_element.get_dofs();
@@ -279,6 +295,23 @@ void GidReader::build_dofs(std::string* arg_family, int* arg_order){
 			Nedelec new_element(element, arg_family, arg_order);
 			curl_conf.add_entity(new_element);
 			// Populate the DOFs' list (TO BE WRITTEN LATER)
+		}
+	}
+}
+
+void GidReader::update_nodes(){
+	for(int j=0; j<nodes.get_length(); j++){
+		Point node = nodes.get_entity(j,true);
+		bool is_dof = true;
+		for(int k=0; k<temp_bnodes.get_length(); k++){
+			Point bnode = temp_bnodes.get_entity(k,true);
+			if(node.get_index()==bnode.get_index()){
+				is_dof = false;
+			}
+		}
+		if(is_dof){
+			node.set_dof(is_dof);
+			inner_nodes.add_entity(node);
 		}
 	}
 }

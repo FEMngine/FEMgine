@@ -53,6 +53,11 @@ double Point::get_z(){
 }
 
 
+bool Point::get_dof(){
+	return dof;
+}
+
+
 int Point::get_BClabel(){
 	return boundary_label;
 }
@@ -66,6 +71,10 @@ double Point::get_BCvalue(){
 // OTHER METHODS
 
 
+void Point::set_dof(bool arg_dof){
+	dof = arg_dof;
+}
+
 void Point::set_x(double arg_x){
 	coord_x = arg_x;
 }
@@ -77,11 +86,6 @@ void Point::set_y(double arg_y){
 void Point::set_z(double arg_z){
 	coord_z = arg_z;
 }
-
-bool Point::is_dof(){
-	return dof;
-}
-
 
 void Point::set_BClabel(int arg_BClabel){
 	boundary_label = arg_BClabel;

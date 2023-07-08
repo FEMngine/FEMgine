@@ -12,7 +12,7 @@ public:
 	Lagrange();
 	// Other constructors
 	// Copy constructor
-	Lagrange(Element &copy_element, std::string* arg_family, int* arg_order);
+	Lagrange(Element &copy_element, EntityList<Point> arg_nodes, std::string* arg_family, int* arg_order);
 	// Destructor
 	~Lagrange() = default;
 

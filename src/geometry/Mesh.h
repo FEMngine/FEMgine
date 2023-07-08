@@ -26,6 +26,7 @@ public:
 
 protected:
 	// Attributes to be inherited
+	EntityList<Point>   nodes;
 	EntityList<Point>   inner_nodes;
 	EntityList<Point>   boundary_nodes;
 	EntityList<DOF>     dofs;

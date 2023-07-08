@@ -13,9 +13,9 @@ public:
 	~Shape() = default;
 
 	// Accessors
-	std::string get_type();
 	Point get_G();
 	double get_area();
+	std::string get_type();
 	// Other methods
 	void init_type(std::string arg_type, EntityList<Point>* arg_nodes);
 	matrix<int> sort_edges(EntityList<Point>* arg_nodes);
@@ -26,9 +26,10 @@ protected:
 
 private:
 	// Attributes
+	std::string type;
 	Point centroid;
 	double area;
-	std::string type;
+
 	std::vector<std::string> shapes = {"Triangle", "Tetrahedron", "Quadrilateral", "Hexahedron"};
 	// Private methods
 };

@@ -25,7 +25,7 @@ void Mesh::print_mesh(){
 	std::cout << "Geo. order: " << geometrical_order << "\n";
 	std::cout << "N° elements: " << nelements << "\n";
 	std::cout << "N° DOFs: " << dofs.get_length() << "\n";
-	std::cout << "N° inner nodes: " << nnodes << "\n";
+	std::cout << "N° nodes: " << nnodes << "\n";
 	std::cout << "N° boundary nodes: " << boundary_nodes.get_length() << "\n";
 	switch(dimension){
 		case 1:
@@ -51,7 +51,7 @@ void Mesh::print_mesh(){
 			std::cout << "(global idx=" << element.get_index() << ")   ";
 			// Initialise the local index for the nodes
 			int local_node_idx=1;
-			for(auto node : element.get_dofs().get_list()){
+			for(auto node : element.get_nodes().get_list()){
 				// Print the nodes
 				std::cout << "v" << local_node_idx << "=" << node.get_index() << ", ";
 				local_node_idx++;
@@ -80,25 +80,10 @@ void Mesh::print_mesh(){
 	}
 	std::cout << "-------------------------------------------" << "\n";
 
-	// Printing the DOFs
-	std::cout << "\n--------------------DOFs-------------------" << "\n";
-	for(int j=1; j<=ndofs; j++){
-		DOF dof = dofs.get_entity(j);
-		std::cout << "(global idx=" << dof.get_index() << ")   ";
-		std::vector<int> dof_support = dof.get_supp();
-		int local_node_idx=1;
-		for(int k=0; k<dof_support.size(); k++){
-			std::cout << "e" << local_node_idx << "=" << dof_support[k] << ", ";
-			local_node_idx++;
-		}
-		std::cout << "\n";
-	}
-	std::cout << "-------------------------------------------" << "\n";
-
-	// Printing the inner nodes
-	std::cout << "\n-----------------Inner Nodes---------------" << "\n";
-	for(int j=1; j<=nnodes; j++){
-		Point node = inner_nodes.get_entity(j);
+	// Printing the nodes
+	std::cout << "\n--------------------Nodes------------------" << "\n";
+	for(int j=0; j<inner_nodes.get_length(); j++){
+		Point node = inner_nodes.get_entity(j,true);
 		std::cout << "(global idx=" << node.get_index() << ")   ";
 		switch(dimension){
 			// Print coordinates according to the spatial dimension of the domain
@@ -116,6 +101,21 @@ void Mesh::print_mesh(){
 		}
 	}
 	std::cout << "------------------------------------" << "\n";
+
+	// Printing the DOFs
+	std::cout << "\n--------------------DOFs-------------------" << "\n";
+	for(int j=0; j<ndofs; j++){
+		DOF dof = dofs.get_entity(j,true);
+		std::cout << "(global idx=" << dof.get_index() << ")   ";
+		std::vector<int> dof_support = dof.get_supp();
+		int local_node_idx=1;
+		for(int k=0; k<dof_support.size(); k++){
+			std::cout << "e" << local_node_idx << "=" << dof_support[k] << ", ";
+			local_node_idx++;
+		}
+		std::cout << "\n";
+	}
+	std::cout << "-------------------------------------------" << "\n";
 
 	// Printing the boundary nodes
 	std::cout << "\n---------------Boundary Nodes--------------" << "\n";
@@ -172,10 +172,10 @@ void Mesh::build_dofs(){/*  */};
 
 void Mesh::init(std::string* arg_family, int* arg_order){
 	// Initialises the fundamental information about the mesh as provided by the input raw mesh
-	dimension = inner_nodes.get_entity(1).get_dimension(); 
+	dimension = nodes.get_entity(1).get_dimension(); 
 	element_type = elements.get_entity(1).get_shape().get_type();
 	
-	nnodes = inner_nodes.get_length();
+	nnodes = nodes.get_length()+1;
 	ndofs = dofs.get_length();
 	nedges = edges.get_length();
 	nfaces = faces.get_length();
