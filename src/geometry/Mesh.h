@@ -18,6 +18,7 @@ public:
 	~Mesh() = default;
 
 	// Accessors
+	std::string get_family();
 	// Other methods
 	void print_mesh();
 	void write_mesh();
@@ -38,10 +39,12 @@ protected:
 	EntityList<Lagrange> lagrangian;
 	EntityList<Nedelec>  curl_conf;
 
-	Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> Stif;
-	Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> Mass;
-	Eigen::Vector<double, Eigen::Dynamic> Source;
-	Eigen::Vector<double, Eigen::Dynamic> BCs;
+	Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> A;  // Stiffness matrix (LHS)
+	Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> M;  // Mass matrix      (LHS)
+	Eigen::Vector<double, Eigen::Dynamic> b;				  // Source vector    (RHS)
+	
+	Eigen::Matrix<double, Eigen::Dynamic, Eigen::Dynamic> Ag; // Boundary matrix  (RHS)
+	Eigen::Vector<double, Eigen::Dynamic> g;				  // Boundary vector  (RHS)
 
 	// Overloaded methods
 	virtual void process();

@@ -12,6 +12,11 @@ Mesh::Mesh(){
 // ACCESSORS
 
 
+std::string Mesh::get_family(){
+	return element_family;
+}
+
+
 // OTHER METHODS
 
 
@@ -82,8 +87,8 @@ void Mesh::print_mesh(){
 
 	// Printing the nodes
 	std::cout << "\n--------------------Nodes------------------" << "\n";
-	for(int j=0; j<inner_nodes.get_length(); j++){
-		Point node = inner_nodes.get_entity(j,true);
+	for(int j=0; j<nodes.get_length(); j++){
+		Point node = nodes.get_entity(j,true);
 		std::cout << "(global idx=" << node.get_index() << ")   ";
 		switch(dimension){
 			// Print coordinates according to the spatial dimension of the domain
@@ -149,12 +154,30 @@ void Mesh::write_mesh(){
 
 void Mesh::assemble(double arg_temp, double arg_diff, double arg_adv, double arg_reac){
 	// Initialise the size of the linear system
-	Stif.resize(ndofs, ndofs);
-	Source.resize(ndofs);
-	BCs.resize(nBCs);
+	A.resize(ndofs, ndofs);
+	Ag.resize(ndofs, ndofs);
+	b.resize(ndofs);
+	g.resize(nBCs);
 	
 	if(arg_temp!=0.0){
-		Mass.resize(ndofs, ndofs);
+		M.resize(ndofs, ndofs);
+	}
+
+	if(element_family=="Lagrange"){
+		for(auto element : lagrangian.get_list()){
+			for(auto dof_test : element.get_dofs().get_list()){
+				// Get local and global indices of the test function
+				int j = dof_test.get_index();
+				int jg = dof_test.get_index();
+				for(auto dof_trial : element.get_dofs().get_list()){
+					int k = dof_trial.get_index();
+					int kg = dof_trial.get_index();
+				}
+			}
+		}
+	}
+	else if(element_family=="Nedelec"){
+		// TO BE WRITTEN LATER
 	}
 }
 

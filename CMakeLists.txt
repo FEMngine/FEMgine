@@ -37,7 +37,6 @@ add_library(femgine STATIC
 set_target_properties(femgine
     PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/build"
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/build"
 )
 target_include_directories(femgine PUBLIC ${INCLUDES})
 
@@ -56,6 +55,7 @@ FetchContent_MakeAvailable(googletest)
 add_library(GTest::GTest INTERFACE IMPORTED)
 target_link_libraries(GTest::GTest INTERFACE gtest_main)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TESTS}/gtest)
 add_executable(unit_gtest ${TESTS}/gtest/gtest.cpp)
 
 target_link_libraries(unit_gtest PRIVATE 
@@ -67,6 +67,7 @@ target_link_libraries(unit_gtest PRIVATE
 add_test(gtests unit_gtest)
 
 # Tutorials
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TESTS}/test)
 add_executable(tutorial_1 ${TESTS}/test/test.cpp)
 include_directories(tutorial_1 ${INCLUDES})
 target_link_libraries(tutorial_1 femgine ${DEPENDENCIES})
