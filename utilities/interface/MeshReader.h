@@ -1,7 +1,6 @@
 // PRIVATE HEADER
 #pragma once
 
-#include "tools.h"
 #include "../../src/geometry/Mesh.h"
 
 class MeshReader: public Mesh{

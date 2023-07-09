@@ -1,8 +1,6 @@
 // PRIVATE HEADER
 #pragma once
 
-#include "tools.h"
-
 // Base class header
 #include "../../utilities/items/Entity.h"
 

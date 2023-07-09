@@ -6,12 +6,11 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/build/unix")
 project(femgine LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17 REQUIRED)
 
-set(INCLUDES "include")
 set(SOURCES "src")
 set(TESTS "tutorials")
 set(UTILS "utilities")
 
-include_directories(${INCLUDES})
+include_directories(${UTILS})
 
 find_package(Eigen3 REQUIRED)
 link_directories(${Eigen_INCLUDE_DIRS})
@@ -38,7 +37,7 @@ set_target_properties(femgine
     PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/build"
 )
-target_include_directories(femgine PUBLIC ${INCLUDES})
+target_include_directories(femgine PUBLIC ${UTILS})
 
 
 enable_testing()
@@ -69,5 +68,5 @@ add_test(gtests unit_gtest)
 # Tutorials
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${TESTS}/test)
 add_executable(tutorial_1 ${TESTS}/test/test.cpp)
-include_directories(tutorial_1 ${INCLUDES})
+include_directories(tutorial_1 ${UTILS})
 target_link_libraries(tutorial_1 femgine ${DEPENDENCIES})
