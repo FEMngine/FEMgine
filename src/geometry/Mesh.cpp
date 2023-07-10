@@ -176,7 +176,9 @@ void Mesh::assemble(double arg_temp, double arg_diff, double arg_adv, double arg
 					// Get local and global indices of the test function
 					int k = dof_test.get_local_index();
 					int kg = dof_test.get_index();
-					A(jg,kg) += 0.0; // TO BE WRITTEN LATER
+					A(jg,kg) += arg_diff*0.0 + 
+								arg_adv*0.0 +
+								arg_react*0.0; // TO BE WRITTEN LATER
 				}
 			}
 			for(int trial=0; trial<element.get_nodes().get_length(); trial++){
@@ -194,7 +196,9 @@ void Mesh::assemble(double arg_temp, double arg_diff, double arg_adv, double arg
 						int kg = element.get_nodes().get_entity(test,true).get_index();
 						if(!element.get_nodes().get_entity(test,true).get_dof()){
 							// Assemble the boundary matrix (Ag), boundary vector (g) and source vector
-							Ag(jg,kg) += 0.0; // TO BE WRITTEN LATER
+							Ag(jg,kg) += arg_diff*0.0 + 
+										 arg_adv*0.0 +
+										 arg_react*0.0; // TO BE WRITTEN LATER
 							g(jg) += 0.0; // TO BE WRITTEN LATER
 						}
 					}
@@ -205,6 +209,9 @@ void Mesh::assemble(double arg_temp, double arg_diff, double arg_adv, double arg
 	else if(element_family=="Nedelec"){
 		// TO BE WRITTEN LATER
 	}
+
+	// Reduce the linear system to the form Ax=b
+	b = b - Ag*g;
 }
 
 
