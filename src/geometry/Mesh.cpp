@@ -155,9 +155,11 @@ void Mesh::write_mesh(){
 void Mesh::assemble(double arg_temp, double arg_diff, double arg_adv, double arg_reac){
 	// Initialise the size of the linear system
 	A.resize(ndofs, ndofs);
-	Ag.resize(ndofs, ndofs);
+	Ag.resize(ndofs, nBCs);
 	b.resize(ndofs);
 	g.resize(nBCs);
+
+	std::cout << A.size() << "\n";
 	
 	if(arg_temp!=0.0){
 		M.resize(ndofs, ndofs);
@@ -165,13 +167,37 @@ void Mesh::assemble(double arg_temp, double arg_diff, double arg_adv, double arg
 
 	if(element_family=="Lagrange"){
 		for(auto element : lagrangian.get_list()){
-			for(auto dof_test : element.get_dofs().get_list()){
-				// Get local and global indices of the test function
-				int j = dof_test.get_index();
-				int jg = dof_test.get_index();
-				for(auto dof_trial : element.get_dofs().get_list()){
-					int k = dof_trial.get_index();
-					int kg = dof_trial.get_index();
+			for(auto dof_trial : element.get_dofs().get_list()){
+				// Get local and global indices of the trial function
+				int j = dof_trial.get_local_index();
+				int jg = dof_trial.get_index();
+				// Assemble the stiffness matrix (A)
+				for(auto dof_test : element.get_dofs().get_list()){
+					// Get local and global indices of the test function
+					int k = dof_test.get_local_index();
+					int kg = dof_test.get_index();
+					A(jg,kg) += 0.0; // TO BE WRITTEN LATER
+				}
+			}
+			for(int trial=0; trial<element.get_nodes().get_length(); trial++){
+				// Get local and global indices of the trial function
+				int j = trial+1;
+				int jg = element.get_nodes().get_entity(trial,true).get_index();
+				if(element.get_nodes().get_entity(trial,true).get_dof()){
+					// Assemble the source vector (b)
+					b(jg) += 0.0; // TO BE WRITTEN LATER
+				}
+				else{
+					for(int test=0; test<element.get_nodes().get_length(); test++){
+						// Get local and global indices of the test function
+						int k = test+1;
+						int kg = element.get_nodes().get_entity(test,true).get_index();
+						if(!element.get_nodes().get_entity(test,true).get_dof()){
+							// Assemble the boundary matrix (Ag), boundary vector (g) and source vector
+							Ag(jg,kg) += 0.0; // TO BE WRITTEN LATER
+							g(jg) += 0.0; // TO BE WRITTEN LATER
+						}
+					}
 				}
 			}
 		}

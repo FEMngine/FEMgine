@@ -252,7 +252,7 @@ void GidReader::build_dofs(std::string* arg_family, int* arg_order){
 	// Initialise Element's child class
 	if(*arg_family=="Lagrange"){	
 		for(auto element : elements.get_list()){
-			// Check whether the nodes in the Element's parent class are indeed al DOFs
+			// Check whether the nodes in the Element's parent class are indeed all DOFs
 			EntityList<Point> new_elemental_nodes;
 			EntityList<Point> elemental_nodes = element.get_nodes();
 			for(int j=0; j<elemental_nodes.get_length(); j++){

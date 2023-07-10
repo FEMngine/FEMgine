@@ -10,7 +10,7 @@ public:
 	DOF();
 	// Other constructors
 	// Copy constructor
-	DOF(Point &copy_point);
+	DOF(Point &copy_point, int arg_local_index);
 	// Destructor
 	~DOF() = default;
 
@@ -19,6 +19,7 @@ public:
 	double get_Fx();
 	double get_Fy();
 	double get_Fz();
+	int get_local_index();
 	std::vector<double> get_F();
 	std::vector<int> get_supp();
 	// Other methods
@@ -31,6 +32,7 @@ protected:
 
 private:
 	// Attributes
+	int local_index;
 	double f_value;
 	double Fx_value;
 	double Fz_value;

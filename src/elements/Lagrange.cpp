@@ -46,7 +46,7 @@ void Lagrange::init_dofs(){
 		for(int j=0; j<nodes.get_length(); j++){
 			Point node = nodes.get_entity(j,true);
 			if(node.get_dof()){
-				dofs.add_entity(DOF(node));
+				dofs.add_entity(DOF(node,j+1));
 			}
 		}
 	}
