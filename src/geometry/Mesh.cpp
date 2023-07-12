@@ -178,7 +178,7 @@ void Mesh::assemble(double arg_temp, double arg_diff, double arg_adv, double arg
 					int kg = dof_test.get_index();
 					A(jg,kg) += arg_diff*0.0 + 
 								arg_adv*0.0 +
-								arg_react*0.0; // TO BE WRITTEN LATER
+								arg_reac*0.0; // TO BE WRITTEN LATER
 				}
 			}
 			for(int trial=0; trial<element.get_nodes().get_length(); trial++){
@@ -198,7 +198,7 @@ void Mesh::assemble(double arg_temp, double arg_diff, double arg_adv, double arg
 							// Assemble the boundary matrix (Ag), boundary vector (g) and source vector
 							Ag(jg,kg) += arg_diff*0.0 + 
 										 arg_adv*0.0 +
-										 arg_react*0.0; // TO BE WRITTEN LATER
+										 arg_reac*0.0; // TO BE WRITTEN LATER
 							g(jg) += 0.0; // TO BE WRITTEN LATER
 						}
 					}
