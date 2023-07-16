@@ -8,7 +8,7 @@ DOF::DOF(): Point(){
 	// Default constructor
 }
 
-DOF::DOF(Point &copy_point): Point(){
+DOF::DOF(Point &copy_point, int arg_local_index): Point(){
 	// Copy constructor
 	global_index = copy_point.get_index();
 	dimension = copy_point.get_dimension();
@@ -16,6 +16,8 @@ DOF::DOF(Point &copy_point): Point(){
 	coord_x = copy_point.get_x();
 	coord_y = copy_point.get_y();
 	coord_z = copy_point.get_z();
+
+	local_index = arg_local_index;
 }
 
 
@@ -36,6 +38,10 @@ double DOF::get_Fy(){
 
 double DOF::get_Fz(){
 	return Fz_value;
+}
+
+int DOF::get_local_index(){
+	return local_index;
 }
 
 std::vector<double> DOF::get_F(){

@@ -1,8 +1,6 @@
 // PRIVATE HEADER
 #pragma once
 
-#include "tools.h"
-
 // Base class header
 #include "../../utilities/items/Entity.h"
 
@@ -22,10 +20,11 @@ public:
 	double get_x();
 	double get_y();
 	double get_z();
+	bool get_dof();
 	int get_BClabel();
 	double get_BCvalue();
 	// Other methods
-	bool is_dof();
+	void set_dof(bool arg_dof);
 	void set_x(double arg_x);
 	void set_y(double arg_y);
 	void set_z(double arg_z);

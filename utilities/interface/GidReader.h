@@ -30,4 +30,5 @@ private:
 	void build_missing_entity_list();
 	void rearrange();
 	void build_dofs(std::string* arg_family, int* arg_order);
+	void update_nodes();
 };

@@ -1,7 +1,6 @@
 // PRIVATE HEADER
 #pragma once
 
-#include "tools.h"
 #include "../../utilities/items/Entity.h"
 #include "../../utilities/items/EntityList.h"
 
